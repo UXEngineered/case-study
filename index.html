@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stacks & Vera — James Williams</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #1A1A1A;
+    --text: #E5E5E5;
+    --text-secondary: rgba(229,229,229,0.6);
+    --text-dim: rgba(229,229,229,0.35);
+    --accent-green: #1D9E75;
+    --accent-green-dim: rgba(29,158,117,0.15);
+    --accent-purple: #7F77DD;
+    --accent-purple-dim: rgba(127,119,221,0.15);
+    --accent-amber: #EF9F27;
+    --accent-amber-dim: rgba(239,159,39,0.12);
+    --accent-red: #E24B4A;
+    --border: rgba(229,229,229,0.08);
+    --border-mid: rgba(229,229,229,0.14);
+    --font-display: 'Host Grotesk', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+
+  html, body {
+    width: 100%; height: 100%;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-display);
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── SLIDE ENGINE ── */
+  #deck { width: 100vw; height: 100vh; position: relative; }
+
+  .slide {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    padding: 72px 80px 48px;
+    opacity: 0; pointer-events: none;
+    transform: translateY(18px);
+    transition: opacity .45s cubic-bezier(.16,1,.3,1), transform .45s cubic-bezier(.16,1,.3,1);
+  }
+  .slide.active {
+    opacity: 1; pointer-events: all;
+    transform: translateY(0);
+  }
+  .slide.exit {
+    opacity: 0; pointer-events: none;
+    transform: translateY(-14px);
+    transition: opacity .3s ease, transform .3s ease;
+  }
+
+  /* ── NAV ── */
+  #nav {
+    position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);
+    display: flex; align-items: center; gap: 20px;
+    z-index: 100;
+    background: rgba(26,26,26,0.85);
+    backdrop-filter: blur(12px);
+    border: 0.5px solid var(--border-mid);
+    border-radius: 100px;
+    padding: 10px 20px;
+  }
+  .nav-dots { display: flex; gap: 7px; align-items: center; }
+  .dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--text-dim); cursor: pointer;
+    transition: all .25s ease;
+  }
+  .dot.active { background: var(--text); transform: scale(1.4); }
+  .dot:hover { background: var(--text-secondary); }
+  .nav-btn {
+    background: none; border: none;
+    color: var(--text-secondary); cursor: pointer;
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: .05em; padding: 2px 8px;
+    transition: color .2s;
+  }
+  .nav-btn:hover { color: var(--text); }
+  #slide-num {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--text-dim); letter-spacing: .05em;
+    min-width: 36px; text-align: center;
+  }
+
+  /* ── PROGRESS ── */
+  #progress-bar {
+    position: fixed; top: 0; left: 0; height: 1.5px;
+    background: var(--accent-green);
+    transition: width .4s cubic-bezier(.16,1,.3,1);
+    z-index: 200;
+  }
+
+  /* ── FOOTER ── */
+  .slide-footer {
+    margin-top: auto;
+    padding-top: 24px;
+    border-top: 0.5px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-left {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--text-dim); letter-spacing: .07em; text-transform: uppercase;
+  }
+  .footer-right {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--text-dim); letter-spacing: .05em;
+  }
+
+  /* ── TYPE SCALE ── */
+  .t-display {
+    font-family: var(--font-display);
+    font-size: clamp(52px, 6.5vw, 84px);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    color: var(--text);
+  }
+  .t-h2 {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 2.8vw, 32px);
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0;
+    color: var(--text);
+  }
+  .t-h3 {
+    font-family: var(--font-display);
+    font-size: clamp(16px, 1.6vw, 20px);
+    font-weight: 500;
+    line-height: 1.35;
+    color: var(--text);
+  }
+  .t-body {
+    font-family: var(--font-display);
+    font-size: clamp(15px, 1.5vw, 18px);
+    font-weight: 300;
+    line-height: 1.38;
+    color: var(--text-secondary);
+  }
+  .t-mono {
+    font-family: var(--font-mono);
+    font-size: clamp(10px, 1vw, 13px);
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  .t-mono-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  /* ── COMPONENTS ── */
+  .pill {
+    display: inline-flex; align-items: center;
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: .06em; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 100px;
+    border: 0.5px solid;
+  }
+  .pill-green { background: var(--accent-green-dim); border-color: rgba(29,158,117,0.3); color: #4ecda4; }
+  .pill-purple { background: var(--accent-purple-dim); border-color: rgba(127,119,221,0.3); color: #b0aaee; }
+  .pill-amber { background: var(--accent-amber-dim); border-color: rgba(239,159,39,0.25); color: #f4b84a; }
+  .pill-dim { background: rgba(229,229,229,0.04); border-color: var(--border); color: var(--text-dim); }
+
+  .card {
+    background: rgba(229,229,229,0.03);
+    border: 0.5px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 22px;
+  }
+  .card-green { border-left: 2px solid var(--accent-green); }
+  .card-purple { border-left: 2px solid var(--accent-purple); }
+  .card-amber { border-left: 2px solid var(--accent-amber); }
+  .card-red { border-left: 2px solid var(--accent-red); }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+
+  /* ── SLIDE 1: TITLE ── */
+  #s1 { justify-content: space-between; }
+  #s1 .eyebrow {
+    font-family: var(--font-mono); font-size: 12px;
+    letter-spacing: .07em; color: var(--text-dim);
+    text-transform: uppercase; margin-bottom: 48px;
+  }
+  #s1 .title-block { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  #s1 .display { margin-bottom: 28px; }
+  #s1 .subtitle {
+    font-family: var(--font-display); font-size: clamp(18px, 2vw, 24px);
+    font-weight: 300; line-height: 1.38; color: var(--text-secondary);
+    max-width: 560px; margin-bottom: 24px;
+  }
+  #s1 .tags { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  /* ── SLIDE 2: PROBLEM ── */
+  #s2 .header { margin-bottom: 36px; }
+  #s2 .lineage {
+    display: flex; align-items: center; gap: 0;
+    margin-bottom: 14px;
+  }
+  #s2 .node {
+    padding: 10px 18px; border: 0.5px solid var(--border-mid);
+    border-radius: 8px; font-size: 14px; font-weight: 400;
+    color: var(--text-secondary); white-space: nowrap;
+    background: rgba(229,229,229,0.03);
+  }
+  #s2 .node.stale {
+    border-color: rgba(239,159,39,0.4);
+    background: var(--accent-amber-dim);
+    color: #f4b84a;
+  }
+  #s2 .arrow {
+    font-size: 14px; color: var(--text-dim);
+    padding: 0 12px; flex-shrink: 0;
+  }
+  #s2 .lineage-label {
+    font-family: var(--font-mono); font-size: 10px;
+    color: var(--text-dim); letter-spacing: .06em;
+    text-transform: uppercase; margin-bottom: 20px;
+    padding-left: 2px;
+  }
+  #s2 .alert-bar {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: rgba(239,159,39,0.07);
+    border: 0.5px solid rgba(239,159,39,0.25);
+    border-radius: 8px; padding: 14px 18px;
+    margin-bottom: 28px;
+  }
+  #s2 .alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  #s2 .alert-text { font-size: 14px; color: #f4b84a; line-height: 1.5; }
+
+  /* ── SLIDE 3: DESIGN QUESTION ── */
+  #s3 .spectrum {
+    margin: 32px 0 36px;
+    position: relative;
+  }
+  #s3 .spectrum-track {
+    height: 1px; background: var(--border-mid);
+    position: relative; margin: 48px 0;
+  }
+  #s3 .spectrum-point {
+    position: absolute; top: 50%; transform: translate(-50%, -50%);
+    width: 10px; height: 10px; border-radius: 50%;
+  }
+  #s3 .point-red { background: var(--accent-red); left: 15%; }
+  #s3 .point-green { background: var(--accent-green); left: 50%; }
+  #s3 .point-purple { background: var(--accent-purple); left: 85%; }
+  #s3 .spectrum-labels {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
+  }
+  #s3 .spec-label { }
+  #s3 .spec-label .name { font-size: 16px; font-weight: 500; margin-bottom: 4px; }
+  #s3 .spec-label .sub {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: .07em; text-transform: uppercase;
+    color: var(--text-dim); margin-bottom: 12px;
+  }
+  #s3 .spec-label .desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; max-width: 220px; margin: 0 auto; }
+  #s3 .spec-label:nth-child(1) .name { color: var(--accent-red); }
+  #s3 .spec-label:nth-child(2) .name { color: var(--accent-green); }
+  #s3 .spec-label:nth-child(3) .name { color: var(--accent-purple); }
+
+  /* ── SLIDE 4: TRUST MODEL ── */
+  #s4 .trust-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 28px; }
+  #s4 .ladder { display: flex; flex-direction: column; gap: 4px; }
+  #s4 .rung {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 18px; border-radius: 10px;
+    border: 0.5px solid;
+  }
+  #s4 .rung-canonical {
+    background: rgba(29,158,117,0.08);
+    border-color: rgba(29,158,117,0.25);
+  }
+  #s4 .rung-proposed {
+    background: rgba(127,119,221,0.08);
+    border-color: rgba(127,119,221,0.25);
+  }
+  #s4 .rung-draft {
+    background: rgba(229,229,229,0.03);
+    border-color: var(--border);
+  }
+  #s4 .rung-label {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: .06em; text-transform: uppercase;
+    flex: 0 0 90px;
+  }
+  #s4 .rung-canonical .rung-label { color: #4ecda4; }
+  #s4 .rung-proposed .rung-label { color: #b0aaee; }
+  #s4 .rung-draft .rung-label { color: var(--text-dim); }
+  #s4 .rung-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.45; flex: 1; }
+  #s4 .rung-tag {
+    font-family: var(--font-mono); font-size: 9px;
+    letter-spacing: .06em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 100px;
+    white-space: nowrap;
+  }
+  #s4 .rung-canonical .rung-tag { background: rgba(29,158,117,0.2); color: #4ecda4; }
+  #s4 .rung-proposed .rung-tag { background: rgba(127,119,221,0.2); color: #b0aaee; }
+  #s4 .rung-draft .rung-tag { background: rgba(229,229,229,0.06); color: var(--text-dim); }
+  #s4 .divider-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 6px 18px;
+  }
+  #s4 .divider-line { height: 1px; background: var(--border); flex: 1; }
+  #s4 .divider-text {
+    font-family: var(--font-mono); font-size: 9px;
+    letter-spacing: .06em; text-transform: uppercase;
+    color: var(--text-dim); white-space: nowrap;
+  }
+  #s4 .side-cards { display: flex; flex-direction: column; gap: 14px; }
+
+  /* ── SLIDE 5: VERA ── */
+  #s5 .vera-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+  #s5 .left-col { display: flex; flex-direction: column; gap: 14px; }
+  #s5 .right-col { display: flex; flex-direction: column; gap: 14px; }
+  .terminal {
+    background: rgba(0,0,0,0.4); border: 0.5px solid rgba(29,158,117,0.2);
+    border-radius: 10px; padding: 16px 18px;
+    font-family: var(--font-mono); font-size: 12px; line-height: 1.8;
+  }
+  .term-cmd { color: #4ecda4; }
+  .term-comment { color: var(--text-dim); }
+  .term-out { color: var(--text-secondary); padding-left: 2px; }
+  .term-out::before { content: '→ '; color: var(--text-dim); }
+  .slack-card {
+    background: rgba(229,229,229,0.03); border: 0.5px solid var(--border);
+    border-radius: 10px; padding: 14px 16px;
+    display: flex; gap: 12px; align-items: flex-start;
+  }
+  .slack-icon { font-size: 18px; flex-shrink: 0; }
+  .slack-channel { font-family: var(--font-mono); font-size: 10px; color: var(--text-dim); letter-spacing: .04em; margin-bottom: 4px; }
+  .slack-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+  .slack-body { font-size: 12px; color: var(--text-secondary); }
+  .conf-block { background: rgba(229,229,229,0.03); border: 0.5px solid var(--border); border-radius: 10px; padding: 16px 18px; }
+  .conf-title { font-size: 13px; font-weight: 500; margin-bottom: 14px; }
+  .conf-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  .conf-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: .05em; text-transform: uppercase; flex: 0 0 56px; }
+  .conf-bar { flex: 1; height: 3px; background: rgba(229,229,229,0.08); border-radius: 2px; overflow: hidden; }
+  .conf-fill { height: 100%; border-radius: 2px; }
+  .conf-phrase { font-size: 11px; color: var(--text-dim); flex: 0 0 160px; font-style: italic; }
+
+  /* ── SLIDE 6: STACKS ── */
+  #s6 .stacks-layout { display: grid; grid-template-columns: 1fr 1.3fr; gap: 32px; margin-top: 24px; align-items: start; }
+  #s6 .spine-wrap {
+    border: 0.5px solid var(--border-mid); border-radius: 10px; overflow: hidden;
+  }
+  #s6 .spine-header {
+    display: grid; grid-template-columns: 1fr 1.4fr 1fr;
+    border-bottom: 0.5px solid var(--border);
+  }
+  #s6 .spine-col-h {
+    padding: 8px 12px;
+    font-family: var(--font-mono); font-size: 9px;
+    letter-spacing: .07em; text-transform: uppercase; color: var(--text-dim);
+    border-right: 0.5px solid var(--border);
+  }
+  #s6 .spine-col-h:last-child { border-right: none; }
+  #s6 .spine-body { display: grid; grid-template-columns: 1fr 1.4fr 1fr; min-height: 180px; }
+  #s6 .spine-col { padding: 10px; border-right: 0.5px solid var(--border); display: flex; flex-direction: column; gap: 5px; }
+  #s6 .spine-col:last-child { border-right: none; }
+  #s6 .s-item {
+    font-size: 11px; color: var(--text-secondary);
+    background: rgba(229,229,229,0.03); border: 0.5px solid var(--border);
+    border-radius: 5px; padding: 6px 8px; line-height: 1.3;
+  }
+  #s6 .s-item.selected { border-color: rgba(29,158,117,0.4); background: rgba(29,158,117,0.07); color: #4ecda4; }
+  #s6 .s-item.flagged { border-color: rgba(239,159,39,0.4); background: var(--accent-amber-dim); color: #f4b84a; }
+  #s6 .spine-dir {
+    display: flex; justify-content: space-between;
+    padding: 8px 12px; border-top: 0.5px solid var(--border);
+    font-family: var(--font-mono); font-size: 9px;
+    letter-spacing: .05em; text-transform: uppercase; color: var(--text-dim);
+  }
+  #s6 .right-col { display: flex; flex-direction: column; gap: 14px; }
+  #s6 .movement-list { background: rgba(229,229,229,0.02); border: 0.5px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+  #s6 .movement-title { font-size: 13px; font-weight: 500; margin-bottom: 12px; }
+  #s6 .mv-row { display: flex; align-items: flex-start; gap: 10px; padding: 7px 0; border-bottom: 0.5px solid var(--border); }
+  #s6 .mv-row:last-child { border-bottom: none; }
+  #s6 .mv-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+  #s6 .mv-dot-human { background: var(--accent-green); }
+  #s6 .mv-dot-agent { background: var(--accent-purple); }
+  #s6 .mv-name { font-size: 12px; font-weight: 500; color: var(--text); }
+  #s6 .mv-meta { font-size: 11px; color: var(--text-dim); margin-top: 1px; }
+
+  /* ── SLIDE 7: THREE DECISIONS ── */
+  #s7 .decisions { display: flex; flex-direction: column; gap: 14px; margin-top: 24px; }
+  #s7 .dec-card {
+    background: rgba(229,229,229,0.02); border: 0.5px solid var(--border);
+    border-radius: 12px; padding: 20px 24px;
+    display: grid; grid-template-columns: 200px 1fr; gap: 24px; align-items: start;
+  }
+  #s7 .dec-card:nth-child(1) { border-left: 2px solid var(--accent-green); }
+  #s7 .dec-card:nth-child(2) { border-left: 2px solid var(--accent-amber); }
+  #s7 .dec-card:nth-child(3) { border-left: 2px solid var(--accent-purple); }
+  #s7 .dec-num { font-family: var(--font-mono); font-size: 10px; letter-spacing: .06em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 6px; }
+  #s7 .dec-q { font-size: 14px; font-weight: 500; line-height: 1.35; color: var(--text); }
+  #s7 .dec-a { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+  #s7 .dec-a strong { color: var(--text); font-weight: 500; }
+
+  /* ── SLIDE 8: PAGERDUTY ── */
+  #s8 .pd-grid { display: grid; grid-template-columns: 1fr 48px 1fr; gap: 0; margin-top: 24px; align-items: start; }
+  #s8 .pd-col { display: flex; flex-direction: column; }
+  #s8 .pd-col-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: .07em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 14px; }
+  #s8 .pd-item { padding: 11px 0; border-bottom: 0.5px solid var(--border); }
+  #s8 .pd-item:last-child { border-bottom: none; }
+  #s8 .pd-item-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+  #s8 .pd-item-sub { font-size: 12px; color: var(--text-secondary); line-height: 1.4; }
+  #s8 .pd-divider {
+    display: flex; flex-direction: column; align-items: center;
+    padding-top: 32px; gap: 12px;
+  }
+  #s8 .pd-div-line { width: 1px; flex: 1; background: var(--border); }
+  #s8 .pd-arrow { color: var(--accent-green); font-size: 16px; }
+  #s8 .close-card {
+    margin-top: 20px; padding: 18px 22px;
+    background: rgba(29,158,117,0.06); border: 0.5px solid rgba(29,158,117,0.2);
+    border-radius: 12px;
+  }
+  #s8 .close-text { font-size: 15px; font-weight: 300; color: var(--text-secondary); line-height: 1.6; font-style: italic; }
+  #s8 .close-text strong { color: var(--text); font-weight: 500; font-style: normal; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .slide.active .anim-1 { animation: fadeUp .5s .05s both; }
+  .slide.active .anim-2 { animation: fadeUp .5s .15s both; }
+  .slide.active .anim-3 { animation: fadeUp .5s .25s both; }
+  .slide.active .anim-4 { animation: fadeUp .5s .35s both; }
+  .slide.active .anim-5 { animation: fadeUp .5s .45s both; }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<div id="deck">
+
+  <!-- ── SLIDE 1: TITLE ── -->
+  <div class="slide active" id="s1">
+    <div class="eyebrow anim-1">James Williams · AI Experience Walkthrough</div>
+    <div class="title-block">
+      <div class="t-display display anim-2">Stacks & Vera</div>
+      <div class="subtitle anim-3">Designing the boundary between agent action and human judgment.</div>
+      <div class="tags anim-4">
+        <span class="pill pill-green">Trust Architecture</span>
+        <span class="pill pill-dim">Agentic Systems</span>
+        <span class="pill pill-purple">Human-in-the-Loop</span>
+        <span class="pill pill-dim">Built in Production</span>
+      </div>
+    </div>
+    <div class="slide-footer anim-5">
+      <span class="footer-left">James Williams · AI Experience Walkthrough</span>
+      <span class="footer-right">01 / 08</span>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 2: THE PROBLEM ── -->
+  <div class="slide" id="s2">
+    <div class="header anim-1">
+      <div class="t-mono-label" style="margin-bottom:14px;">The Problem</div>
+      <div class="t-h2">Teams make decisions.<br>The reasoning behind them collapses.</div>
+    </div>
+    <div class="anim-2">
+      <div class="lineage-label">How evidence becomes a decision →</div>
+      <div class="lineage">
+        <div class="node">Interview</div>
+        <div class="arrow">→</div>
+        <div class="node">Insight</div>
+        <div class="arrow">→</div>
+        <div class="node">Synthesis</div>
+        <div class="arrow">→</div>
+        <div class="node">Recommendation</div>
+        <div class="arrow">→</div>
+        <div class="node stale">Decision ⚠</div>
+      </div>
+    </div>
+    <div class="alert-bar anim-3">
+      <div class="alert-icon">⚠</div>
+      <div class="alert-text">Six weeks later — why did we decide this? What evidence supported it? Is it still true?</div>
+    </div>
+    <div class="grid-2 anim-4">
+      <div class="card card-amber">
+        <div class="t-h3" style="margin-bottom:8px;">The Symptom</div>
+        <div class="t-body">Documentation exists. Decisions get recorded. But the connective tissue between evidence and output is invisible.</div>
+      </div>
+      <div class="card card-green">
+        <div class="t-h3" style="margin-bottom:8px;">The Real Problem</div>
+        <div class="t-body">When an assumption changes upstream, there's no signal downstream. Work becomes stale with no way to know it.</div>
+      </div>
+    </div>
+    <div class="slide-footer anim-5">
+      <span class="footer-left">James Williams · AI Experience Walkthrough</span>
+      <span class="footer-right">02 / 08</span>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 3: DESIGN QUESTION ── -->
+  <div class="slide" id="s3">
+    <div class="anim-1">
+      <div class="t-mono-label" style="margin-bottom:14px;">The Design Question</div>
+      <div class="t-h2" style="max-width:700px;">Where does the agent act,<br>and where does it stop?</div>
+    </div>
+    <div class="spectrum anim-2">
+      <div class="spectrum-track">
+        <div class="spectrum-point point-red"></div>
+        <div class="spectrum-point point-green"></div>
+        <div class="spectrum-point point-purple"></div>
+      </div>
+    </div>
+    <div class="spectrum-labels anim-3">
+      <div class="spec-label">
+        <div class="name">Fully Automated</div>
+        <div class="sub">Fast, erodes trust</div>
+        <div class="desc">Agent overwrites things. Promotes outputs that aren't ready. Trust collapses.</div>
+      </div>
+      <div class="spec-label">
+        <div class="name">Right Balance</div>
+        <div class="sub">System surfaces, human decides</div>
+        <div class="desc">System acts on routine work. Surfaces uncertainty for human review. Trust compounds.</div>
+      </div>
+      <div class="spec-label">
+        <div class="name">Fully Human</div>
+        <div class="sub">Trustworthy, too slow</div>
+        <div class="desc">Agent asks permission so often it's not worth using. Automation has no value.</div>
+      </div>
+    </div>
+    <div class="card anim-4" style="margin-top:24px; border-color: rgba(29,158,117,0.2);">
+      <div class="t-body">Every design decision in Stacks and Vera — every constraint, interaction pattern, UI decision — is an answer to this question.</div>
+    </div>
+    <div class="slide-footer anim-5">
+      <span class="footer-left">James Williams · AI Experience Walkthrough</span>
+      <span class="footer-right">03 / 08</span>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 4: TRUST MODEL ── -->
+  <div class="slide" id="s4">
+    <div class="anim-1">
+      <div class="t-mono-label" style="margin-bottom:14px;">The Foundation</div>
+      <div class="t-h2">The governance layer — designed before any surface.</div>
+    </div>
+    <div class="trust-layout">
+      <div class="ladder anim-2">
+        <div class="rung rung-canonical">
+          <div class="rung-label">Canonical</div>
+          <div class="rung-desc">Source of truth. Immutable to agents. Promoted only by humans after review.</div>
+          <div class="rung-tag">Human only</div>
+        </div>
+        <div class="divider-row">
+          <div class="divider-line"></div>
+          <div class="divider-text">human review required</div>
+          <div class="divider-line"></div>
+        </div>
+        <div class="rung rung-proposed">
+          <div class="rung-label">Proposed</div>
+          <div class="rung-desc">Agent ceiling. Ready for human review. Visible and traceable, not yet trusted.</div>
+          <div class="rung-tag">Agent ceiling</div>
+        </div>
+        <div class="rung rung-draft" style="margin-top:4px;">
+          <div class="rung-label">Draft</div>
+          <div class="rung-desc">All agent output starts here. Never auto-promotes. Requires human action.</div>
+          <div class="rung-tag">Agent floor</div>
+        </div>
+      </div>
+      <div class="side-cards anim-3">
+        <div class="card card-purple">
+          <div class="t-h3" style="margin-bottom:8px;">Visibility ceiling</div>
+          <div class="t-body">Agents capped at <code style="font-family:var(--font-mono);font-size:11px;background:rgba(229,229,229,0.06);padding:2px 6px;border-radius:3px;">client_shareable</code>. Never <code style="font-family:var(--font-mono);font-size:11px;background:rgba(229,229,229,0.06);padding:2px 6px;border-radius:3px;">client_facing</code>. A human must decide something is ready to leave the building.</div>
+        </div>
+        <div class="card card-green">
+          <div class="t-h3" style="margin-bottom:8px;">Movement events</div>
+          <div class="t-body">Every agent action emits a permanent audit record — what changed, who did it, why. Attributed to <code style="font-family:var(--font-mono);font-size:11px;background:rgba(229,229,229,0.06);padding:2px 6px;border-radius:3px;">agent:vera</code>, not anonymous.</div>
+        </div>
+        <div class="card" style="background:rgba(229,229,229,0.02);">
+          <div class="t-body" style="font-style:italic;">"If I got the trust model wrong, everything built on top of it would be wrong too."</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer anim-4">
+      <span class="footer-left">James Williams · AI Experience Walkthrough</span>
+      <span class="footer-right">04 / 08</span>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 5: VERA ── -->
+  <div class="slide" id="s5">
+    <div class="anim-1">
+      <div class="t-mono-label" style="margin-bottom:14px;">The Agent Layer</div>
+      <div style="display:flex; align-items:baseline; gap:16px; flex-wrap:wrap;">
+        <div class="t-h2">Vera</div>
+        <span class="pill pill-dim">CLI-based · Running in production · No UI by design</span>
+      </div>
+    </div>
+    <div class="vera-grid">
+      <div class="left-col anim-2">
+        <div class="card card-green">
+          <div class="t-h3" style="margin-bottom:8px;">What Vera does</div>
+          <div class="t-body">Monitors evidence for gaps and drift · Detects staleness · Generates candidate assumptions · Produces governed artifacts from structured evidence</div>
+        </div>
+        <div class="card card-purple">
+          <div class="t-h3" style="margin-bottom:8px;">The interaction model</div>
+          <div class="t-body">Agents propose. Humans approve. Candidates live in <code style="font-family:var(--font-mono);font-size:11px;background:rgba(229,229,229,0.06);padding:2px 5px;border-radius:3px;">/candidates/</code> until a human moves them.</div>
+        </div>
+        <div class="slack-card">
+          <div class="slack-icon">⚠️</div>
+          <div>
+            <div class="slack-channel">#project-vera-alerts</div>
+            <div class="slack-title">Risk RISK-003 has no testable assumptions</div>
+            <div class="slack-body">3 candidates generated → Review and approve</div>
+          </div>
+        </div>
+      </div>
+      <div class="right-col anim-3">
+        <div class="terminal">
+          <div class="term-comment"># Run monitor check</div>
+          <div class="term-cmd">vera monitor</div>
+          <div class="term-out">2 gaps detected</div>
+          <div class="term-out">1 drift warning · Slack alert sent</div>
+          <br>
+          <div class="term-comment"># Generate artifacts</div>
+          <div class="term-cmd">vera generate artifacts</div>
+          <div class="term-out">roadmap.md ✓ [EV-001] [EV-004]</div>
+          <div class="term-out">strategy.md ✓ [HYPOTHESIS] flagged</div>
+          <div class="term-out">scope-check.md ✓</div>
+        </div>
+        <div class="conf-block">
+          <div class="conf-title">Confidence → Language rules <span class="pill pill-dim" style="font-size:9px;margin-left:6px;">enforced, not suggested</span></div>
+          <div class="conf-row">
+            <div class="conf-label" style="color:#4ecda4;">High</div>
+            <div class="conf-bar"><div class="conf-fill" style="width:88%;background:var(--accent-green);"></div></div>
+            <div class="conf-phrase">"The system should..."</div>
+          </div>
+          <div class="conf-row">
+            <div class="conf-label" style="color:#f4b84a;">Medium</div>
+            <div class="conf-bar"><div class="conf-fill" style="width:55%;background:var(--accent-amber);"></div></div>
+            <div class="conf-phrase">"Evidence suggests..."</div>
+          </div>
+          <div class="conf-row" style="margin-bottom:0;">
+            <div class="conf-label" style="color:#e87070;">Low</div>
+            <div class="conf-bar"><div class="conf-fill" style="width:24%;background:var(--accent-red);"></div></div>
+            <div class="conf-phrase">"Current hypothesis..."</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer anim-4">
+      <span class="footer-left">James Williams · AI Experience Walkthrough</span>
+      <span class="footer-right">05 / 08</span>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 6: STACKS ── -->
+  <div class="slide" id="s6">
+    <div class="anim-1">
+      <div class="t-mono-label" style="margin-bottom:14px;">The Human Interface</div>
+      <div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;">
+        <div class="t-h2">Stacks</div>
+        <span class="pill pill-dim">React · TypeScript · Cursor · Claude · tldraw</span>
+      </div>
+    </div>
+    <div class="stacks-layout">
+      <div class="anim-2">
+        <div class="spine-wrap">
+          <div class="spine-header">
+            <div class="spine-col-h">← Sources</div>
+            <div class="spine-col-h">Synthesis</div>
+            <div class="spine-col-h">Artifacts →</div>
+          </div>
+          <div class="spine-body">
+            <div class="spine-col">
+              <div class="s-item">CTO interview — auth constraints</div>
+              <div class="s-item selected">User research — onboarding</div>
+              <div class="s-item">Technical spike — feasibility</div>
+              <div class="s-item">Slack thread — vendor</div>
+            </div>
+            <div class="spine-col">
+              <div class="s-item selected">Onboarding takes &gt;4 min for 60% of users</div>
+              <div class="s-item">Auth adds 90s on average</div>
+              <div class="s-item flagged">Vendor integration feasible ⚠</div>
+            </div>
+            <div class="spine-col">
+              <div class="s-item">Roadmap Q3</div>
+              <div class="s-item flagged">Strategy doc ⚠ stale</div>
+              <div class="s-item">Scope check</div>
+            </div>
+          </div>
+          <div class="spine-dir">
+            <span>← Audit: right to left</span>
+            <span>Understand: left to right →</span>
+          </div>
+        </div>
+        <div class="card card-amber" style="margin-top:12px;">
+          <div class="t-h3" style="margin-bottom:6px;">Reverberation</div>
+          <div class="t-body">Upstream source changes → downstream artifacts flagged. Not auto-updated. The system surfaces the question. The human answers it.</div>
+        </div>
+      </div>
+      <div class="right-col anim-3">
+        <div class="card card-purple">
+          <div class="t-h3" style="margin-bottom:6px;">Semantic layer</div>
+          <div class="t-body">Status, visibility, lifecycle on every node. Agents capped at <span class="pill pill-purple" style="font-size:9px;">proposed</span>. Humans promote to <span class="pill pill-green" style="font-size:9px;">canonical</span>. Same trust model as Vera.</div>
+        </div>
+        <div class="movement-list">
+          <div class="movement-title">Movement events</div>
+          <div class="mv-row">
+            <div class="mv-dot mv-dot-human"></div>
+            <div>
+              <div class="mv-name">Promoted to canonical</div>
+              <div class="mv-meta">user:james · Strategy doc · 2 min ago</div>
+            </div>
+          </div>
+          <div class="mv-row">
+            <div class="mv-dot mv-dot-agent"></div>
+            <div>
+              <div class="mv-name">Proposed recalibration</div>
+              <div class="mv-meta">agent:vera · Onboarding synthesis · upstream changed</div>
+            </div>
+          </div>
+          <div class="mv-row">
+            <div class="mv-dot mv-dot-agent"></div>
+            <div>
+              <div class="mv-name">Created synthesis (draft)</div>
+              <div class="mv-meta">agent:vera · Auth friction pattern · pending review</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer anim-4">
+      <span class="footer-left">James Williams · AI Experience Walkthrough</span>
+      <span class="footer-right">06 / 08</span>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 7: THREE DECISIONS ── -->
+  <div class="slide" id="s7">
+    <div class="anim-1">
+      <div class="t-mono-label" style="margin-bottom:14px;">Design Judgment</div>
+      <div class="t-h2">Three decisions worth discussing.</div>
+    </div>
+    <div class="decisions">
+      <div class="dec-card anim-2">
+        <div>
+          <div class="dec-num">Decision 01</div>
+          <div class="dec-q">Why can't agents promote to canonical?</div>
+        </div>
+        <div class="dec-a"><strong>Trust is earned incrementally, not granted by default.</strong> More automation feels like more value — but there's a category of decision where the cost of getting it wrong is high enough that it has to be a human call. The agent ceiling isn't a limitation. It's the design.</div>
+      </div>
+      <div class="dec-card anim-3">
+        <div>
+          <div class="dec-num">Decision 02</div>
+          <div class="dec-q">Why does reverberation flag instead of auto-update?</div>
+        </div>
+        <div class="dec-a"><strong>Automated propagation sounds efficient. It's wrong.</strong> When an upstream assumption changes, the right downstream response depends on context the system doesn't have. The flag model is slower — but it preserves judgment at exactly the moment judgment matters.</div>
+      </div>
+      <div class="dec-card anim-4">
+        <div>
+          <div class="dec-num">Decision 03</div>
+          <div class="dec-q">Why are movement events structural, not a feature?</div>
+        </div>
+        <div class="dec-a"><strong>I built the audit trail before most of the UI.</strong> If you treat auditability as a feature you add at the end, you get incomplete coverage. For agentic systems, humans need to see everything the agent did. Not a summary. Everything.</div>
+      </div>
+    </div>
+    <div class="slide-footer anim-5">
+      <span class="footer-left">James Williams · AI Experience Walkthrough</span>
+      <span class="footer-right">07 / 08</span>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 8: PAGERDUTY ── -->
+  <div class="slide" id="s8">
+    <div class="anim-1">
+      <div class="t-mono-label" style="margin-bottom:14px;">The Connection</div>
+      <div class="t-h2">Same design problem. Different domain.</div>
+    </div>
+    <div class="pd-grid anim-2">
+      <div class="pd-col">
+        <div class="pd-col-label">Stacks + Vera</div>
+        <div class="pd-item">
+          <div class="pd-item-title">Evidence changes upstream</div>
+          <div class="pd-item-sub">Downstream work may be stale</div>
+        </div>
+        <div class="pd-item">
+          <div class="pd-item-title">Agent proposes, human promotes</div>
+          <div class="pd-item-sub">Canonical requires human review</div>
+        </div>
+        <div class="pd-item">
+          <div class="pd-item-title">Confidence language rules</div>
+          <div class="pd-item-sub">Low → hypothesis · High → definitive</div>
+        </div>
+        <div class="pd-item">
+          <div class="pd-item-title">Movement events</div>
+          <div class="pd-item-sub">Full audit trail, agent attributed</div>
+        </div>
+        <div class="pd-item">
+          <div class="pd-item-title">Reverberation flags</div>
+          <div class="pd-item-sub">System surfaces · Human decides</div>
+        </div>
+      </div>
+      <div class="pd-divider">
+        <div class="pd-div-line"></div>
+        <div class="pd-arrow">⇄</div>
+        <div class="pd-div-line"></div>
+      </div>
+      <div class="pd-col">
+        <div class="pd-col-label">PagerDuty AI & Automation</div>
+        <div class="pd-item">
+          <div class="pd-item-title">Alert fires in production</div>
+          <div class="pd-item-sub">On-call engineer gets paged</div>
+        </div>
+        <div class="pd-item">
+          <div class="pd-item-title">System triages, human resolves</div>
+          <div class="pd-item-sub">Where is the boundary?</div>
+        </div>
+        <div class="pd-item">
+          <div class="pd-item-title">Signal clarity under pressure</div>
+          <div class="pd-item-sub">Right 3 things at 2am</div>
+        </div>
+        <div class="pd-item">
+          <div class="pd-item-title">Incident timeline = audit trail</div>
+          <div class="pd-item-sub">What happened, in order</div>
+        </div>
+        <div class="pd-item">
+          <div class="pd-item-title">Auto-resolve vs. escalate</div>
+          <div class="pd-item-sub">System surfaces · Human decides</div>
+        </div>
+      </div>
+    </div>
+    <div class="close-card anim-3">
+      <div class="close-text">"I've been designing this boundary for two years. The context was discovery work and evidence management. The underlying problem — <strong>agent autonomy, human trust, explainability under pressure</strong> — is the same problem you're trying to solve. What I'd bring is a worked answer, not a theory."</div>
+    </div>
+    <div class="slide-footer anim-4">
+      <span class="footer-left">James Williams · AI Experience Walkthrough</span>
+      <span class="footer-right">08 / 08</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── NAV ── -->
+<div id="nav">
+  <button class="nav-btn" onclick="prev()">←</button>
+  <div class="nav-dots" id="dots"></div>
+  <div id="slide-num">1 / 8</div>
+  <button class="nav-btn" onclick="next()">→</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+
+  function buildDots() {
+    const d = document.getElementById('dots');
+    d.innerHTML = '';
+    for (let i = 0; i < total; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'dot' + (i === current ? ' active' : '');
+      dot.onclick = () => goTo(i);
+      d.appendChild(dot);
+    }
+  }
+
+  function goTo(n) {
+    slides[current].classList.remove('active');
+    slides[current].classList.add('exit');
+    setTimeout(() => slides[current].classList.remove('exit'), 350);
+    current = Math.max(0, Math.min(total - 1, n));
+    slides[current].classList.add('active');
+    document.getElementById('slide-num').textContent = `${current + 1} / ${total}`;
+    document.getElementById('progress-bar').style.width = `${((current + 1) / total) * 100}%`;
+    buildDots();
+  }
+
+  function next() { if (current < total - 1) goTo(current + 1); }
+  function prev() { if (current > 0) goTo(current - 1); }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'Space') { e.preventDefault(); next(); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+  });
+
+  // init
+  document.getElementById('progress-bar').style.width = `${(1 / total) * 100}%`;
+  buildDots();
+</script>
+</body>
+</html>

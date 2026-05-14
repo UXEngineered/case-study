@@ -33,7 +33,7 @@
     background: var(--bg);
     color: var(--text);
     font-family: var(--font-display);
-    overflow: hidden;
+    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -340,10 +340,20 @@
   #s5 .detail-section .t-body { font-size: 13px; line-height: 1.6; }
   #s5 .taste-signal { background: rgba(127,119,221,0.05); border-left: 2px solid var(--accent-purple); padding: 18px 22px; border-radius: 8px; margin: 28px 0; font-style: italic; font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
 
-  /* ── SLIDE 6: VERA ── */
-  #s6 .vera-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
-  #s6 .left-col { display: flex; flex-direction: column; gap: 14px; }
-  #s6 .right-col { display: flex; flex-direction: column; gap: 14px; }
+  /* ── SLIDE 6: REVERBERATION ── */
+  #s6 .reverberation-iframe { width: 100%; height: 480px; border: 0.5px solid var(--border-mid); border-radius: 10px; margin: 24px 0; }
+  #s6 .reverberation-intro { font-size: 15px; color: var(--text-secondary); line-height: 1.6; margin: 24px 0 32px; }
+  #s6 .decision-block { background: rgba(239,159,39,0.05); border-left: 2px solid var(--accent-amber); padding: 20px 22px; border-radius: 8px; margin: 28px 0; }
+  #s6 .decision-block .t-body { font-size: 14px; line-height: 1.6; color: var(--text-secondary); }
+  #s6 .flag-detail { background: rgba(229,229,229,0.02); border: 0.5px solid var(--border); border-radius: 10px; padding: 20px 22px; margin: 24px 0; }
+  #s6 .flag-detail .t-h3 { margin-bottom: 12px; }
+  #s6 .flag-detail .t-body { font-size: 13px; line-height: 1.6; }
+  #s6 .taste-signal-amber { background: rgba(239,159,39,0.05); border-left: 2px solid var(--accent-amber); padding: 18px 22px; border-radius: 8px; margin: 28px 0; font-style: italic; font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+
+  /* ── SLIDE 7: VERA ── */
+  #s7 .vera-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+  #s7 .left-col { display: flex; flex-direction: column; gap: 14px; }
+  #s7 .right-col { display: flex; flex-direction: column; gap: 14px; }
   .terminal {
     background: rgba(0,0,0,0.4); border: 0.5px solid rgba(29,158,117,0.2);
     border-radius: 10px; padding: 16px 18px;
@@ -370,85 +380,85 @@
   .conf-fill { height: 100%; border-radius: 2px; }
   .conf-phrase { font-size: 11px; color: var(--text-dim); flex: 0 0 160px; font-style: italic; }
 
-  /* ── SLIDE 7: STACKS ── */
-  #s7 .stacks-layout { display: grid; grid-template-columns: 1fr 1.3fr; gap: 32px; margin-top: 24px; align-items: start; }
-  #s7 .spine-wrap {
+  /* ── SLIDE 8: STACKS ── */
+  #s8 .stacks-layout { display: grid; grid-template-columns: 1fr 1.3fr; gap: 32px; margin-top: 24px; align-items: start; }
+  #s8 .spine-wrap {
     border: 0.5px solid var(--border-mid); border-radius: 10px; overflow: hidden;
   }
-  #s7 .spine-header {
+  #s8 .spine-header {
     display: grid; grid-template-columns: 1fr 1.4fr 1fr;
     border-bottom: 0.5px solid var(--border);
   }
-  #s7 .spine-col-h {
+  #s8 .spine-col-h {
     padding: 8px 12px;
     font-family: var(--font-mono); font-size: 9px;
     letter-spacing: .07em; text-transform: uppercase; color: var(--text-dim);
     border-right: 0.5px solid var(--border);
   }
-  #s7 .spine-col-h:last-child { border-right: none; }
-  #s7 .spine-body { display: grid; grid-template-columns: 1fr 1.4fr 1fr; min-height: 180px; }
-  #s7 .spine-col { padding: 10px; border-right: 0.5px solid var(--border); display: flex; flex-direction: column; gap: 5px; }
-  #s7 .spine-col:last-child { border-right: none; }
-  #s7 .s-item {
+  #s8 .spine-col-h:last-child { border-right: none; }
+  #s8 .spine-body { display: grid; grid-template-columns: 1fr 1.4fr 1fr; min-height: 180px; }
+  #s8 .spine-col { padding: 10px; border-right: 0.5px solid var(--border); display: flex; flex-direction: column; gap: 5px; }
+  #s8 .spine-col:last-child { border-right: none; }
+  #s8 .s-item {
     font-size: 11px; color: var(--text-secondary);
     background: rgba(229,229,229,0.03); border: 0.5px solid var(--border);
     border-radius: 5px; padding: 6px 8px; line-height: 1.3;
   }
-  #s7 .s-item.selected { border-color: rgba(29,158,117,0.4); background: rgba(29,158,117,0.07); color: #4ecda4; }
-  #s7 .s-item.flagged { border-color: rgba(239,159,39,0.4); background: var(--accent-amber-dim); color: #f4b84a; }
-  #s7 .spine-dir {
+  #s8 .s-item.selected { border-color: rgba(29,158,117,0.4); background: rgba(29,158,117,0.07); color: #4ecda4; }
+  #s8 .s-item.flagged { border-color: rgba(239,159,39,0.4); background: var(--accent-amber-dim); color: #f4b84a; }
+  #s8 .spine-dir {
     display: flex; justify-content: space-between;
     padding: 8px 12px; border-top: 0.5px solid var(--border);
     font-family: var(--font-mono); font-size: 9px;
     letter-spacing: .05em; text-transform: uppercase; color: var(--text-dim);
   }
-  #s7 .right-col { display: flex; flex-direction: column; gap: 14px; }
-  #s7 .movement-list { background: rgba(229,229,229,0.02); border: 0.5px solid var(--border); border-radius: 10px; padding: 14px 16px; }
-  #s7 .movement-title { font-size: 13px; font-weight: 500; margin-bottom: 12px; }
-  #s7 .mv-row { display: flex; align-items: flex-start; gap: 10px; padding: 7px 0; border-bottom: 0.5px solid var(--border); }
-  #s7 .mv-row:last-child { border-bottom: none; }
-  #s7 .mv-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
-  #s7 .mv-dot-human { background: var(--accent-green); }
-  #s7 .mv-dot-agent { background: var(--accent-purple); }
-  #s7 .mv-name { font-size: 12px; font-weight: 500; color: var(--text); }
-  #s7 .mv-meta { font-size: 11px; color: var(--text-dim); margin-top: 1px; }
+  #s8 .right-col { display: flex; flex-direction: column; gap: 14px; }
+  #s8 .movement-list { background: rgba(229,229,229,0.02); border: 0.5px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+  #s8 .movement-title { font-size: 13px; font-weight: 500; margin-bottom: 12px; }
+  #s8 .mv-row { display: flex; align-items: flex-start; gap: 10px; padding: 7px 0; border-bottom: 0.5px solid var(--border); }
+  #s8 .mv-row:last-child { border-bottom: none; }
+  #s8 .mv-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+  #s8 .mv-dot-human { background: var(--accent-green); }
+  #s8 .mv-dot-agent { background: var(--accent-purple); }
+  #s8 .mv-name { font-size: 12px; font-weight: 500; color: var(--text); }
+  #s8 .mv-meta { font-size: 11px; color: var(--text-dim); margin-top: 1px; }
 
-  /* ── SLIDE 8: THREE DECISIONS ── */
-  #s8 .decisions { display: flex; flex-direction: row; gap: 14px; margin-top: 24px; }
-  #s8 .dec-card {
+  /* ── SLIDE 9: THREE DECISIONS ── */
+  #s9 .decisions { display: flex; flex-direction: row; gap: 14px; margin-top: 24px; }
+  #s9 .dec-card {
     background: rgba(229,229,229,0.02); border: 0.5px solid var(--border);
     border-radius: 12px; padding: 20px 24px;
     display: grid; gap: 24px; align-items: start;
   }
-  #s8 .dec-card:nth-child(1) { border-left: 2px solid var(--accent-green); }
-  #s8 .dec-card:nth-child(2) { border-left: 2px solid var(--accent-amber); }
-  #s8 .dec-card:nth-child(3) { border-left: 2px solid var(--accent-purple); }
-  #s8 .dec-num { font-family: var(--font-mono); font-size: 10px; letter-spacing: .06em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 6px; }
-  #s8 .dec-q { font-size: 14px; font-weight: 500; line-height: 1.35; color: var(--text); }
-  #s8 .dec-a { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
-  #s8 .dec-a strong { color: var(--text); font-weight: 500; }
+  #s9 .dec-card:nth-child(1) { border-left: 2px solid var(--accent-green); }
+  #s9 .dec-card:nth-child(2) { border-left: 2px solid var(--accent-amber); }
+  #s9 .dec-card:nth-child(3) { border-left: 2px solid var(--accent-purple); }
+  #s9 .dec-num { font-family: var(--font-mono); font-size: 10px; letter-spacing: .06em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 6px; }
+  #s9 .dec-q { font-size: 14px; font-weight: 500; line-height: 1.35; color: var(--text); }
+  #s9 .dec-a { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+  #s9 .dec-a strong { color: var(--text); font-weight: 500; }
 
-  /* ── SLIDE 9: PAGERDUTY ── */
-  #s9 .pd-grid { display: grid; grid-template-columns: 1fr 48px 1fr; gap: 0; margin-top: 24px; align-items: start; }
-  #s9 .pd-col { display: flex; flex-direction: column; }
-  #s9 .pd-col-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: .07em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 14px; }
-  #s9 .pd-item { padding: 11px 0; border-bottom: 0.5px solid var(--border); }
-  #s9 .pd-item:last-child { border-bottom: none; }
-  #s9 .pd-item-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
-  #s9 .pd-item-sub { font-size: 12px; color: var(--text-secondary); line-height: 1.4; }
-  #s9 .pd-divider {
+  /* ── SLIDE 10: PAGERDUTY ── */
+  #s10 .pd-grid { display: grid; grid-template-columns: 1fr 48px 1fr; gap: 0; margin-top: 24px; align-items: start; }
+  #s10 .pd-col { display: flex; flex-direction: column; }
+  #s10 .pd-col-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: .07em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 14px; }
+  #s10 .pd-item { padding: 11px 0; border-bottom: 0.5px solid var(--border); }
+  #s10 .pd-item:last-child { border-bottom: none; }
+  #s10 .pd-item-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+  #s10 .pd-item-sub { font-size: 12px; color: var(--text-secondary); line-height: 1.4; }
+  #s10 .pd-divider {
     display: flex; flex-direction: column; align-items: center;
     padding-top: 32px; gap: 12px;
   }
-  #s9 .pd-div-line { width: 1px; flex: 1; background: var(--border); }
-  #s9 .pd-arrow { color: var(--accent-green); font-size: 16px; }
-  #s9 .close-card {
+  #s10 .pd-div-line { width: 1px; flex: 1; background: var(--border); }
+  #s10 .pd-arrow { color: var(--accent-green); font-size: 16px; }
+  #s10 .close-card {
     margin-top: 20px; padding: 18px 22px;
     background: rgba(29,158,117,0.06); border: 0.5px solid rgba(29,158,117,0.2);
     border-radius: 12px;
   }
-  #s9 .close-text { font-size: 15px; font-weight: 300; color: var(--text-secondary); line-height: 1.6; font-style: italic; }
-  #s9 .close-text strong { color: var(--text); font-weight: 500; font-style: normal; }
+  #s10 .close-text { font-size: 15px; font-weight: 300; color: var(--text-secondary); line-height: 1.6; font-style: italic; }
+  #s10 .close-text strong { color: var(--text); font-weight: 500; font-style: normal; }
 
   /* ── ANIMATIONS ── */
   @keyframes fadeUp {
@@ -482,7 +492,7 @@
     </div>
     <div class="slide-footer anim-5">
       <span class="footer-left">James Williams · AI Experience Walkthrough</span>
-      <span class="footer-right">01 / 10</span>
+      <span class="footer-right">01 / 11</span>
     </div>
   </div>
 
@@ -518,7 +528,7 @@
     </div>
     <div class="slide-footer anim-5">
       <span class="footer-left">James Williams · AI Experience Walkthrough</span>
-      <span class="footer-right">02 / 10</span>
+      <span class="footer-right">02 / 11</span>
     </div>
   </div>
 
@@ -557,7 +567,7 @@
     </div>
     <div class="slide-footer anim-5">
       <span class="footer-left">James Williams · AI Experience Walkthrough</span>
-      <span class="footer-right">03 / 10</span>
+      <span class="footer-right">03 / 11</span>
     </div>
   </div>
 
@@ -578,38 +588,49 @@
     </div>
     <div class="slide-footer anim-4">
       <span class="footer-left">James Williams · AI Experience Walkthrough</span>
-      <span class="footer-right">04 / 10</span>
+      <span class="footer-right">04 / 11</span>
     </div>
   </div>
 
   <!-- ── SLIDE 5: SPINE ── -->
-  <div class="slide" id="s5">
+  <div class="slide slide-scroll" id="s5">
     <div class="anim-1">
       <div class="t-mono-label" style="margin-bottom:14px;">The Interface</div>
-      <div class="t-h2">The Spine: a layout that encodes a mental model</div>
-      <div class="t-mono" style="margin-top:6px; font-size:11px; color:var(--text-dim);">4 min</div>
+      <div class="t-h2" style="margin-bottom:64px;">The Spine: a layout that encodes a mental model</div>
     </div>
-    <iframe class="spine-iframe anim-2" src="https://stacks-rosy.vercel.app/projects" title="Stacks Interface"></iframe>
-    <div class="spine-description anim-3">Three columns. Read left to right to understand. Right to left to audit. The layout is a directional argument.</div>
-    <div class="spine-details anim-3">
-      <div class="detail-section">
-        <div class="t-h3" style="color:var(--text);">The Source Panel</div>
-        <div class="t-body">Typography hierarchy signals the type of input: interview, research, technical analysis. Semantic status pills show confidence and recency. Density enables scanning hundreds of sources without overwhelm.</div>
-      </div>
-      <div class="detail-section">
-        <div class="t-h3" style="color:var(--text);">The Lineage Panel</div>
-        <div class="t-body">Upstream traces sources. Downstream traces artifacts. Placed on the right because that's where your eye goes when you're questioning something — you start from the output and trace backward. The layout makes that instinct correct.</div>
-      </div>
-    </div>
-    <div class="taste-signal anim-4">"I could have put lineage anywhere. I put it right because that's where you go when you're questioning something — you start from the artifact and trace backward. The layout makes that instinct correct."</div>
+    <iframe class="spine-iframe anim-2" src="https://stacks-rosy.vercel.app/projects/fb-fsr-discovery" title="Stacks Interface"></iframe>
+      
     <div class="slide-footer anim-5">
       <span class="footer-left">James Williams · AI Experience Walkthrough</span>
-      <span class="footer-right">05 / 10</span>
+      <span class="footer-right">05 / 11</span>
     </div>
   </div>
 
-  <!-- ── SLIDE 6: TRUST MODEL ── -->
+  <!-- ── SLIDE 6: REVERBERATION ── -->
   <div class="slide" id="s6">
+    <div class="anim-1">
+      <div class="t-mono-label" style="margin-bottom:14px;">The Interaction Pattern</div>
+      <div class="t-h2">Reverberation: the interaction that defines the system</div>
+      <div class="t-mono" style="margin-top:6px; font-size:11px; color:var(--text-dim);">5 min</div>
+    </div>
+    <iframe class="reverberation-iframe anim-2" src="https://stacks-rosy.vercel.app/projects/fb-fsr-discovery" title="Reverberation Demo"></iframe>
+    <div class="reverberation-intro anim-3">Watch: upstream source gets edited → the flag appears on the downstream artifact. This moment defines the system.</div>
+    <div class="decision-block anim-3">
+      <div class="t-body"><strong>Two implementations competed here.</strong> Auto-update: the system rewrites downstream content when upstream changes. Flag: the system marks it and stops. Auto-update is more automated. It's also wrong. The right response to an upstream change depends on context the system doesn't have. I designed the flag because I trust human judgment more than I trust propagation logic.</div>
+    </div>
+    <div class="flag-detail anim-4">
+      <div class="t-h3" style="color:var(--text);">The Flag in Detail</div>
+      <div class="t-body">The copy is precise: "[source name] was updated. This content may be affected." The accept/ignore affordance is deliberate—not a modal, not dismissible. You have to choose. The visual weight matters: amber, not red. It's not an error. It's a question.</div>
+    </div>
+    <div class="taste-signal-amber anim-5">"The flag has to be visible enough to act on but not alarming. It's not an error. It's a question. The visual treatment communicates that — amber, not red."</div>
+    <div class="slide-footer anim-5">
+      <span class="footer-left">James Williams · AI Experience Walkthrough</span>
+      <span class="footer-right">06 / 11</span>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 7: TRUST MODEL ── -->
+  <div class="slide" id="s7">
     <div class="anim-1">
       <div class="t-mono-label" style="margin-bottom:14px;">The Foundation</div>
       <div class="t-h2">The governance layer — designed before any surface.</div>
@@ -653,12 +674,12 @@
     </div>
     <div class="slide-footer anim-4">
       <span class="footer-left">James Williams · AI Experience Walkthrough</span>
-      <span class="footer-right">06 / 10</span>
+      <span class="footer-right">07 / 11</span>
     </div>
   </div>
 
-  <!-- ── SLIDE 7: VERA ── -->
-  <div class="slide" id="s7">
+  <!-- ── SLIDE 8: VERA ── -->
+  <div class="slide" id="s8">
     <div class="anim-1">
       <div class="t-mono-label" style="margin-bottom:14px;">The Agent Layer</div>
       <div style="display:flex; align-items:baseline; gap:16px; flex-wrap:wrap;">
@@ -720,12 +741,12 @@
     </div>
     <div class="slide-footer anim-4">
       <span class="footer-left">James Williams · AI Experience Walkthrough</span>
-      <span class="footer-right">07 / 10</span>
+      <span class="footer-right">08 / 11</span>
     </div>
   </div>
 
-  <!-- ── SLIDE 8: STACKS ── -->
-  <div class="slide" id="s8">
+  <!-- ── SLIDE 9: STACKS ── -->
+  <div class="slide" id="s9">
     <div class="anim-1">
       <div class="t-mono-label" style="margin-bottom:14px;">The Human Interface</div>
       <div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;">
@@ -802,12 +823,12 @@
     </div>
     <div class="slide-footer anim-4">
       <span class="footer-left">James Williams · AI Experience Walkthrough</span>
-      <span class="footer-right">08 / 10</span>
+      <span class="footer-right">09 / 11</span>
     </div>
   </div>
 
-  <!-- ── SLIDE 9: THREE DECISIONS ── -->
-  <div class="slide" id="s9">
+  <!-- ── SLIDE 10: THREE DECISIONS ── -->
+  <div class="slide" id="s10">
     <div class="anim-1">
       <div class="t-mono-label" style="margin-bottom:14px;">Design Judgment</div>
       <div class="t-h2">Three decisions worth discussing.</div>
@@ -837,12 +858,12 @@
     </div>
     <div class="slide-footer anim-5">
       <span class="footer-left">James Williams · AI Experience Walkthrough</span>
-      <span class="footer-right">09 / 10</span>
+      <span class="footer-right">10 / 11</span>
     </div>
   </div>
 
-  <!-- ── SLIDE 10: PAGERDUTY ── -->
-  <div class="slide" id="s10">
+  <!-- ── SLIDE 11: PAGERDUTY ── -->
+  <div class="slide" id="s11">
     <div class="anim-1">
       <div class="t-mono-label" style="margin-bottom:14px;">The Connection</div>
       <div class="t-h2">Same design problem. Different domain.</div>
@@ -905,7 +926,7 @@
     </div>
     <div class="slide-footer anim-4">
       <span class="footer-left">James Williams · AI Experience Walkthrough</span>
-      <span class="footer-right">10 / 10</span>
+      <span class="footer-right">11 / 11</span>
     </div>
   </div>
 
@@ -915,7 +936,7 @@
 <div id="nav">
   <button class="nav-btn" onclick="prev()">←</button>
   <div class="nav-dots" id="dots"></div>
-  <div id="slide-num">1 / 10</div>
+  <div id="slide-num">1 / 11</div>
   <button class="nav-btn" onclick="next()">→</button>
 </div>
 

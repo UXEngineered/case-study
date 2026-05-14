@@ -43,8 +43,10 @@
   .slide {
     position: absolute; inset: 0;
     display: flex; flex-direction: column;
-    padding: 72px 80px 48px;
+    padding: 100px 140px 48px;
     opacity: 0; pointer-events: none;
+    max-width: 1365px;
+    margin: 0 auto;
     transform: translateY(18px);
     transition: opacity .45s cubic-bezier(.16,1,.3,1), transform .45s cubic-bezier(.16,1,.3,1);
   }
@@ -65,7 +67,7 @@
     z-index: 100;
     background: rgba(26,26,26,0.85);
     backdrop-filter: blur(12px);
-    border: 0.5px solid var(--border-mid);
+    border: 0.75px solid var(--border-mid);
     border-radius: 100px;
     padding: 10px 20px;
   }
@@ -99,6 +101,10 @@
     z-index: 200;
   }
 
+  .body-content {
+    margin: 28px 0 56px 0;
+  }
+
   /* ── FOOTER ── */
   .slide-footer {
     margin-top: auto;
@@ -126,9 +132,9 @@
   }
   .t-h2 {
     font-family: var(--font-display);
-    font-size: clamp(22px, 2.8vw, 32px);
+    font-size: clamp(22px, 2.8vw, 48px);
     font-weight: 500;
-    line-height: 1.4;
+    line-height: 1.1;
     letter-spacing: 0;
     color: var(--text);
   }
@@ -205,7 +211,7 @@
   #s1 .tags { display: flex; gap: 10px; flex-wrap: wrap; }
 
   /* ── SLIDE 2: PROBLEM ── */
-  #s2 .header { margin-bottom: 36px; }
+  #s2 .header { margin-bottom: 64px; }
   #s2 .lineage {
     display: flex; align-items: center; gap: 0;
     margin-bottom: 14px;
@@ -236,7 +242,7 @@
     background: rgba(239,159,39,0.07);
     border: 0.5px solid rgba(239,159,39,0.25);
     border-radius: 8px; padding: 14px 18px;
-    margin-bottom: 28px;
+    margin: 28px 0;
   }
   #s2 .alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
   #s2 .alert-text { font-size: 14px; color: #f4b84a; line-height: 1.5; }
@@ -252,11 +258,11 @@
   }
   #s3 .spectrum-point {
     position: absolute; top: 50%; transform: translate(-50%, -50%);
-    width: 10px; height: 10px; border-radius: 50%;
+    width: 14px; height: 14px; border-radius: 50%;
   }
-  #s3 .point-red { background: var(--accent-red); left: 15%; }
+  #s3 .point-red { background: var(--accent-red); left: 16.5%; }
   #s3 .point-green { background: var(--accent-green); left: 50%; }
-  #s3 .point-purple { background: var(--accent-purple); left: 85%; }
+  #s3 .point-purple { background: var(--accent-purple); left: 83.5%; }
   #s3 .spectrum-labels {
     display: grid; grid-template-columns: 1fr 1fr 1fr;
     text-align: center;
@@ -273,60 +279,60 @@
   #s3 .spec-label:nth-child(2) .name { color: var(--accent-green); }
   #s3 .spec-label:nth-child(3) .name { color: var(--accent-purple); }
 
-  /* ── SLIDE 4: TRUST MODEL ── */
-  #s4 .trust-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 28px; }
-  #s4 .ladder { display: flex; flex-direction: column; gap: 4px; }
-  #s4 .rung {
+  /* ── SLIDE 5: TRUST MODEL ── */
+  #s5 .trust-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 28px; }
+  #s5 .ladder { display: flex; flex-direction: column; gap: 4px; }
+  #s5 .rung {
     display: flex; align-items: center; gap: 14px;
     padding: 14px 18px; border-radius: 10px;
     border: 0.5px solid;
   }
-  #s4 .rung-canonical {
+  #s5 .rung-canonical {
     background: rgba(29,158,117,0.08);
     border-color: rgba(29,158,117,0.25);
   }
-  #s4 .rung-proposed {
+  #s5 .rung-proposed {
     background: rgba(127,119,221,0.08);
     border-color: rgba(127,119,221,0.25);
   }
-  #s4 .rung-draft {
+  #s5 .rung-draft {
     background: rgba(229,229,229,0.03);
     border-color: var(--border);
   }
-  #s4 .rung-label {
+  #s5 .rung-label {
     font-family: var(--font-mono); font-size: 11px;
     letter-spacing: .06em; text-transform: uppercase;
     flex: 0 0 90px;
   }
-  #s4 .rung-canonical .rung-label { color: #4ecda4; }
-  #s4 .rung-proposed .rung-label { color: #b0aaee; }
-  #s4 .rung-draft .rung-label { color: var(--text-dim); }
-  #s4 .rung-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.45; flex: 1; }
-  #s4 .rung-tag {
+  #s5 .rung-canonical .rung-label { color: #4ecda4; }
+  #s5 .rung-proposed .rung-label { color: #b0aaee; }
+  #s5 .rung-draft .rung-label { color: var(--text-dim); }
+  #s5 .rung-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.45; flex: 1; }
+  #s5 .rung-tag {
     font-family: var(--font-mono); font-size: 9px;
     letter-spacing: .06em; text-transform: uppercase;
     padding: 3px 8px; border-radius: 100px;
     white-space: nowrap;
   }
-  #s4 .rung-canonical .rung-tag { background: rgba(29,158,117,0.2); color: #4ecda4; }
-  #s4 .rung-proposed .rung-tag { background: rgba(127,119,221,0.2); color: #b0aaee; }
-  #s4 .rung-draft .rung-tag { background: rgba(229,229,229,0.06); color: var(--text-dim); }
-  #s4 .divider-row {
+  #s5 .rung-canonical .rung-tag { background: rgba(29,158,117,0.2); color: #4ecda4; }
+  #s5 .rung-proposed .rung-tag { background: rgba(127,119,221,0.2); color: #b0aaee; }
+  #s5 .rung-draft .rung-tag { background: rgba(229,229,229,0.06); color: var(--text-dim); }
+  #s5 .divider-row {
     display: flex; align-items: center; gap: 10px;
     padding: 6px 18px;
   }
-  #s4 .divider-line { height: 1px; background: var(--border); flex: 1; }
-  #s4 .divider-text {
+  #s5 .divider-line { height: 1px; background: var(--border); flex: 1; }
+  #s5 .divider-text {
     font-family: var(--font-mono); font-size: 9px;
     letter-spacing: .06em; text-transform: uppercase;
     color: var(--text-dim); white-space: nowrap;
   }
-  #s4 .side-cards { display: flex; flex-direction: column; gap: 14px; }
+  #s5 .side-cards { display: flex; flex-direction: column; gap: 14px; }
 
-  /* ── SLIDE 5: VERA ── */
+  /* ── SLIDE 6: VERA ── */
   #s5 .vera-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
-  #s5 .left-col { display: flex; flex-direction: column; gap: 14px; }
-  #s5 .right-col { display: flex; flex-direction: column; gap: 14px; }
+  #s6 .left-col { display: flex; flex-direction: column; gap: 14px; }
+  #s6 .right-col { display: flex; flex-direction: column; gap: 14px; }
   .terminal {
     background: rgba(0,0,0,0.4); border: 0.5px solid rgba(29,158,117,0.2);
     border-radius: 10px; padding: 16px 18px;
@@ -353,85 +359,85 @@
   .conf-fill { height: 100%; border-radius: 2px; }
   .conf-phrase { font-size: 11px; color: var(--text-dim); flex: 0 0 160px; font-style: italic; }
 
-  /* ── SLIDE 6: STACKS ── */
-  #s6 .stacks-layout { display: grid; grid-template-columns: 1fr 1.3fr; gap: 32px; margin-top: 24px; align-items: start; }
-  #s6 .spine-wrap {
+  /* ── SLIDE 7: STACKS ── */
+  #s7 .stacks-layout { display: grid; grid-template-columns: 1fr 1.3fr; gap: 32px; margin-top: 24px; align-items: start; }
+  #s7 .spine-wrap {
     border: 0.5px solid var(--border-mid); border-radius: 10px; overflow: hidden;
   }
-  #s6 .spine-header {
+  #s7 .spine-header {
     display: grid; grid-template-columns: 1fr 1.4fr 1fr;
     border-bottom: 0.5px solid var(--border);
   }
-  #s6 .spine-col-h {
+  #s7 .spine-col-h {
     padding: 8px 12px;
     font-family: var(--font-mono); font-size: 9px;
     letter-spacing: .07em; text-transform: uppercase; color: var(--text-dim);
     border-right: 0.5px solid var(--border);
   }
-  #s6 .spine-col-h:last-child { border-right: none; }
-  #s6 .spine-body { display: grid; grid-template-columns: 1fr 1.4fr 1fr; min-height: 180px; }
-  #s6 .spine-col { padding: 10px; border-right: 0.5px solid var(--border); display: flex; flex-direction: column; gap: 5px; }
-  #s6 .spine-col:last-child { border-right: none; }
-  #s6 .s-item {
+  #s7 .spine-col-h:last-child { border-right: none; }
+  #s7 .spine-body { display: grid; grid-template-columns: 1fr 1.4fr 1fr; min-height: 180px; }
+  #s7 .spine-col { padding: 10px; border-right: 0.5px solid var(--border); display: flex; flex-direction: column; gap: 5px; }
+  #s7 .spine-col:last-child { border-right: none; }
+  #s7 .s-item {
     font-size: 11px; color: var(--text-secondary);
     background: rgba(229,229,229,0.03); border: 0.5px solid var(--border);
     border-radius: 5px; padding: 6px 8px; line-height: 1.3;
   }
-  #s6 .s-item.selected { border-color: rgba(29,158,117,0.4); background: rgba(29,158,117,0.07); color: #4ecda4; }
-  #s6 .s-item.flagged { border-color: rgba(239,159,39,0.4); background: var(--accent-amber-dim); color: #f4b84a; }
-  #s6 .spine-dir {
+  #s7 .s-item.selected { border-color: rgba(29,158,117,0.4); background: rgba(29,158,117,0.07); color: #4ecda4; }
+  #s7 .s-item.flagged { border-color: rgba(239,159,39,0.4); background: var(--accent-amber-dim); color: #f4b84a; }
+  #s7 .spine-dir {
     display: flex; justify-content: space-between;
     padding: 8px 12px; border-top: 0.5px solid var(--border);
     font-family: var(--font-mono); font-size: 9px;
     letter-spacing: .05em; text-transform: uppercase; color: var(--text-dim);
   }
-  #s6 .right-col { display: flex; flex-direction: column; gap: 14px; }
-  #s6 .movement-list { background: rgba(229,229,229,0.02); border: 0.5px solid var(--border); border-radius: 10px; padding: 14px 16px; }
-  #s6 .movement-title { font-size: 13px; font-weight: 500; margin-bottom: 12px; }
-  #s6 .mv-row { display: flex; align-items: flex-start; gap: 10px; padding: 7px 0; border-bottom: 0.5px solid var(--border); }
-  #s6 .mv-row:last-child { border-bottom: none; }
-  #s6 .mv-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
-  #s6 .mv-dot-human { background: var(--accent-green); }
-  #s6 .mv-dot-agent { background: var(--accent-purple); }
-  #s6 .mv-name { font-size: 12px; font-weight: 500; color: var(--text); }
-  #s6 .mv-meta { font-size: 11px; color: var(--text-dim); margin-top: 1px; }
+  #s7 .right-col { display: flex; flex-direction: column; gap: 14px; }
+  #s7 .movement-list { background: rgba(229,229,229,0.02); border: 0.5px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+  #s7 .movement-title { font-size: 13px; font-weight: 500; margin-bottom: 12px; }
+  #s7 .mv-row { display: flex; align-items: flex-start; gap: 10px; padding: 7px 0; border-bottom: 0.5px solid var(--border); }
+  #s7 .mv-row:last-child { border-bottom: none; }
+  #s7 .mv-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+  #s7 .mv-dot-human { background: var(--accent-green); }
+  #s7 .mv-dot-agent { background: var(--accent-purple); }
+  #s7 .mv-name { font-size: 12px; font-weight: 500; color: var(--text); }
+  #s7 .mv-meta { font-size: 11px; color: var(--text-dim); margin-top: 1px; }
 
-  /* ── SLIDE 7: THREE DECISIONS ── */
-  #s7 .decisions { display: flex; flex-direction: column; gap: 14px; margin-top: 24px; }
-  #s7 .dec-card {
+  /* ── SLIDE 8: THREE DECISIONS ── */
+  #s8 .decisions { display: flex; flex-direction: column; gap: 14px; margin-top: 24px; }
+  #s8 .dec-card {
     background: rgba(229,229,229,0.02); border: 0.5px solid var(--border);
     border-radius: 12px; padding: 20px 24px;
     display: grid; grid-template-columns: 200px 1fr; gap: 24px; align-items: start;
   }
-  #s7 .dec-card:nth-child(1) { border-left: 2px solid var(--accent-green); }
-  #s7 .dec-card:nth-child(2) { border-left: 2px solid var(--accent-amber); }
-  #s7 .dec-card:nth-child(3) { border-left: 2px solid var(--accent-purple); }
-  #s7 .dec-num { font-family: var(--font-mono); font-size: 10px; letter-spacing: .06em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 6px; }
-  #s7 .dec-q { font-size: 14px; font-weight: 500; line-height: 1.35; color: var(--text); }
-  #s7 .dec-a { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
-  #s7 .dec-a strong { color: var(--text); font-weight: 500; }
+  #s8 .dec-card:nth-child(1) { border-left: 2px solid var(--accent-green); }
+  #s8 .dec-card:nth-child(2) { border-left: 2px solid var(--accent-amber); }
+  #s8 .dec-card:nth-child(3) { border-left: 2px solid var(--accent-purple); }
+  #s8 .dec-num { font-family: var(--font-mono); font-size: 10px; letter-spacing: .06em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 6px; }
+  #s8 .dec-q { font-size: 14px; font-weight: 500; line-height: 1.35; color: var(--text); }
+  #s8 .dec-a { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+  #s8 .dec-a strong { color: var(--text); font-weight: 500; }
 
-  /* ── SLIDE 8: PAGERDUTY ── */
-  #s8 .pd-grid { display: grid; grid-template-columns: 1fr 48px 1fr; gap: 0; margin-top: 24px; align-items: start; }
-  #s8 .pd-col { display: flex; flex-direction: column; }
-  #s8 .pd-col-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: .07em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 14px; }
-  #s8 .pd-item { padding: 11px 0; border-bottom: 0.5px solid var(--border); }
-  #s8 .pd-item:last-child { border-bottom: none; }
-  #s8 .pd-item-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
-  #s8 .pd-item-sub { font-size: 12px; color: var(--text-secondary); line-height: 1.4; }
-  #s8 .pd-divider {
+  /* ── SLIDE 9: PAGERDUTY ── */
+  #s9 .pd-grid { display: grid; grid-template-columns: 1fr 48px 1fr; gap: 0; margin-top: 24px; align-items: start; }
+  #s9 .pd-col { display: flex; flex-direction: column; }
+  #s9 .pd-col-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: .07em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 14px; }
+  #s9 .pd-item { padding: 11px 0; border-bottom: 0.5px solid var(--border); }
+  #s9 .pd-item:last-child { border-bottom: none; }
+  #s9 .pd-item-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+  #s9 .pd-item-sub { font-size: 12px; color: var(--text-secondary); line-height: 1.4; }
+  #s9 .pd-divider {
     display: flex; flex-direction: column; align-items: center;
     padding-top: 32px; gap: 12px;
   }
-  #s8 .pd-div-line { width: 1px; flex: 1; background: var(--border); }
-  #s8 .pd-arrow { color: var(--accent-green); font-size: 16px; }
-  #s8 .close-card {
+  #s9 .pd-div-line { width: 1px; flex: 1; background: var(--border); }
+  #s9 .pd-arrow { color: var(--accent-green); font-size: 16px; }
+  #s9 .close-card {
     margin-top: 20px; padding: 18px 22px;
     background: rgba(29,158,117,0.06); border: 0.5px solid rgba(29,158,117,0.2);
     border-radius: 12px;
   }
-  #s8 .close-text { font-size: 15px; font-weight: 300; color: var(--text-secondary); line-height: 1.6; font-style: italic; }
-  #s8 .close-text strong { color: var(--text); font-weight: 500; font-style: normal; }
+  #s9 .close-text { font-size: 15px; font-weight: 300; color: var(--text-secondary); line-height: 1.6; font-style: italic; }
+  #s9 .close-text strong { color: var(--text); font-weight: 500; font-style: normal; }
 
   /* ── ANIMATIONS ── */
   @keyframes fadeUp {
@@ -466,7 +472,7 @@
     </div>
     <div class="slide-footer anim-5">
       <span class="footer-left">James Williams · AI Experience Walkthrough</span>
-      <span class="footer-right">01 / 08</span>
+      <span class="footer-right">01 / 09</span>
     </div>
   </div>
 
@@ -476,7 +482,7 @@
       <div class="t-mono-label" style="margin-bottom:14px;">The Problem</div>
       <div class="t-h2">Teams make decisions.<br>The reasoning behind them collapses.</div>
     </div>
-    <div class="anim-2">
+    <div class="anim-2 body-content">
       <div class="lineage-label">How evidence becomes a decision →</div>
       <div class="lineage">
         <div class="node">Interview</div>
@@ -490,23 +496,19 @@
         <div class="node stale">Decision ⚠</div>
       </div>
     </div>
-    <div class="alert-bar anim-3">
-      <div class="alert-icon">⚠</div>
-      <div class="alert-text">Six weeks later — why did we decide this? What evidence supported it? Is it still true?</div>
-    </div>
     <div class="grid-2 anim-4">
-      <div class="card card-amber">
+      <div class="">
         <div class="t-h3" style="margin-bottom:8px;">The Symptom</div>
         <div class="t-body">Documentation exists. Decisions get recorded. But the connective tissue between evidence and output is invisible.</div>
       </div>
-      <div class="card card-green">
+      <div class="">
         <div class="t-h3" style="margin-bottom:8px;">The Real Problem</div>
         <div class="t-body">When an assumption changes upstream, there's no signal downstream. Work becomes stale with no way to know it.</div>
       </div>
     </div>
     <div class="slide-footer anim-5">
       <span class="footer-left">James Williams · AI Experience Walkthrough</span>
-      <span class="footer-right">02 / 08</span>
+      <span class="footer-right">02 / 09</span>
     </div>
   </div>
 
@@ -540,17 +542,40 @@
         <div class="desc">Agent asks permission so often it's not worth using. Automation has no value.</div>
       </div>
     </div>
-    <div class="card anim-4" style="margin-top:24px; border-color: rgba(29,158,117,0.2);">
+    <div class="anim-4" style="margin-top:24px; border-color: rgba(29,158,117,0.2);">
       <div class="t-body">Every design decision in Stacks and Vera — every constraint, interaction pattern, UI decision — is an answer to this question.</div>
     </div>
     <div class="slide-footer anim-5">
       <span class="footer-left">James Williams · AI Experience Walkthrough</span>
-      <span class="footer-right">03 / 08</span>
+      <span class="footer-right">03 / 09</span>
     </div>
   </div>
 
-  <!-- ── SLIDE 4: TRUST MODEL ── -->
+  <!-- ── SLIDE 4: MY ROLE ── -->
   <div class="slide" id="s4">
+    <div class="anim-1">
+      <div class="t-mono-label" style="margin-bottom:14px;">My Role</div>
+      <div class="t-h2">Slide 4 — My role (2 min)</div>
+    </div>
+    <div class="card anim-2" style="margin-top:28px; border-color: rgba(29,158,117,0.2);">
+      <div class="t-body">"I designed and built this end-to-end. No team, no brief, no client. I mapped the system, defined the data model, designed every surface, and shipped it in React and TypeScript using Cursor and Claude as daily tools. Everything you're about to see is mine."</div>
+    </div>
+    <div class="anim-3" style="margin-top:32px;">
+      <div class="t-h3" style="margin-bottom:16px;">What I owned:</div>
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <div class="t-body">• Interaction model and governance layer</div>
+        <div class="t-body">• Every UI surface — the Spine, lineage panel, semantic layer, movement drawer</div>
+        <div class="t-body">• The reverberation system — how upstream changes propagate as flags, not overwrites</div>
+      </div>
+    </div>
+    <div class="slide-footer anim-4">
+      <span class="footer-left">James Williams · AI Experience Walkthrough</span>
+      <span class="footer-right">04 / 09</span>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 5: TRUST MODEL ── -->
+  <div class="slide" id="s5">
     <div class="anim-1">
       <div class="t-mono-label" style="margin-bottom:14px;">The Foundation</div>
       <div class="t-h2">The governance layer — designed before any surface.</div>
@@ -594,12 +619,12 @@
     </div>
     <div class="slide-footer anim-4">
       <span class="footer-left">James Williams · AI Experience Walkthrough</span>
-      <span class="footer-right">04 / 08</span>
+      <span class="footer-right">05 / 09</span>
     </div>
   </div>
 
-  <!-- ── SLIDE 5: VERA ── -->
-  <div class="slide" id="s5">
+  <!-- ── SLIDE 6: VERA ── -->
+  <div class="slide" id="s6">
     <div class="anim-1">
       <div class="t-mono-label" style="margin-bottom:14px;">The Agent Layer</div>
       <div style="display:flex; align-items:baseline; gap:16px; flex-wrap:wrap;">
@@ -661,12 +686,12 @@
     </div>
     <div class="slide-footer anim-4">
       <span class="footer-left">James Williams · AI Experience Walkthrough</span>
-      <span class="footer-right">05 / 08</span>
+      <span class="footer-right">06 / 09</span>
     </div>
   </div>
 
-  <!-- ── SLIDE 6: STACKS ── -->
-  <div class="slide" id="s6">
+  <!-- ── SLIDE 7: STACKS ── -->
+  <div class="slide" id="s7">
     <div class="anim-1">
       <div class="t-mono-label" style="margin-bottom:14px;">The Human Interface</div>
       <div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;">
@@ -743,12 +768,12 @@
     </div>
     <div class="slide-footer anim-4">
       <span class="footer-left">James Williams · AI Experience Walkthrough</span>
-      <span class="footer-right">06 / 08</span>
+      <span class="footer-right">07 / 09</span>
     </div>
   </div>
 
-  <!-- ── SLIDE 7: THREE DECISIONS ── -->
-  <div class="slide" id="s7">
+  <!-- ── SLIDE 8: THREE DECISIONS ── -->
+  <div class="slide" id="s8">
     <div class="anim-1">
       <div class="t-mono-label" style="margin-bottom:14px;">Design Judgment</div>
       <div class="t-h2">Three decisions worth discussing.</div>
@@ -778,12 +803,12 @@
     </div>
     <div class="slide-footer anim-5">
       <span class="footer-left">James Williams · AI Experience Walkthrough</span>
-      <span class="footer-right">07 / 08</span>
+      <span class="footer-right">08 / 09</span>
     </div>
   </div>
 
-  <!-- ── SLIDE 8: PAGERDUTY ── -->
-  <div class="slide" id="s8">
+  <!-- ── SLIDE 9: PAGERDUTY ── -->
+  <div class="slide" id="s9">
     <div class="anim-1">
       <div class="t-mono-label" style="margin-bottom:14px;">The Connection</div>
       <div class="t-h2">Same design problem. Different domain.</div>
@@ -846,7 +871,7 @@
     </div>
     <div class="slide-footer anim-4">
       <span class="footer-left">James Williams · AI Experience Walkthrough</span>
-      <span class="footer-right">08 / 08</span>
+      <span class="footer-right">09 / 09</span>
     </div>
   </div>
 
@@ -856,7 +881,7 @@
 <div id="nav">
   <button class="nav-btn" onclick="prev()">←</button>
   <div class="nav-dots" id="dots"></div>
-  <div id="slide-num">1 / 8</div>
+  <div id="slide-num">1 / 9</div>
   <button class="nav-btn" onclick="next()">→</button>
 </div>
 

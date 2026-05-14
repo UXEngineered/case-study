@@ -128,11 +128,12 @@
     font-weight: 500;
     line-height: 1.05;
     letter-spacing: -0.015em;
+    margin-top: 40px;
     color: var(--text);
   }
   .t-h2 {
     font-family: var(--font-display);
-    font-size: clamp(22px, 2.8vw, 48px);
+    font-size: clamp(22px, 2.8vw, 56px);
     font-weight: 500;
     line-height: 1.1;
     letter-spacing: 0;
@@ -201,8 +202,8 @@
     letter-spacing: .07em; color: var(--text-dim);
     text-transform: uppercase; margin-bottom: 48px;
   }
-  #s1 .title-block { flex: 1; display: flex; flex-direction: column; justify-content: center; }
-  #s1 .display { margin-bottom: 28px; }
+  #s1 .title-block { flex: 1; display: flex; flex-direction: column; }
+  #s1 .display { margin-bottom: 144px; }
   #s1 .subtitle {
     font-family: var(--font-display); font-size: clamp(18px, 2vw, 24px);
     font-weight: 300; line-height: 1.38; color: var(--text-secondary);
@@ -249,12 +250,12 @@
 
   /* ── SLIDE 3: DESIGN QUESTION ── */
   #s3 .spectrum {
-    margin: 32px 0 36px;
+    margin: 32px 0 0;
     position: relative;
   }
   #s3 .spectrum-track {
     height: 1px; background: var(--border-mid);
-    position: relative; margin: 48px 0;
+    position: relative; margin: 32px 0;
   }
   #s3 .spectrum-point {
     position: absolute; top: 50%; transform: translate(-50%, -50%);
@@ -266,9 +267,10 @@
   #s3 .spectrum-labels {
     display: grid; grid-template-columns: 1fr 1fr 1fr;
     text-align: center;
+    margin-bottom: 100px;
   }
   #s3 .spec-label { }
-  #s3 .spec-label .name { font-size: 16px; font-weight: 500; margin-bottom: 4px; }
+  #s3 .spec-label .name { font-size: clamp(16px, 1.6vw, 20px); font-weight: 500; margin-bottom: 12px; }
   #s3 .spec-label .sub {
     font-family: var(--font-mono); font-size: 10px;
     letter-spacing: .07em; text-transform: uppercase;
@@ -329,8 +331,17 @@
   }
   #s5 .side-cards { display: flex; flex-direction: column; gap: 14px; }
 
+  /* ── SLIDE 5: SPINE ── */
+  #s5 .spine-iframe { width: 100%; height: 480px; border: 0.5px solid var(--border-mid); border-radius: 10px; margin: 24px 0; }
+  #s5 .spine-description { font-size: 15px; color: var(--text-secondary); line-height: 1.6; margin: 24px 0 32px; }
+  #s5 .spine-details { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 28px 0; }
+  #s5 .detail-section { background: rgba(229,229,229,0.02); border: 0.5px solid var(--border); border-radius: 10px; padding: 20px 22px; }
+  #s5 .detail-section .t-h3 { margin-bottom: 12px; }
+  #s5 .detail-section .t-body { font-size: 13px; line-height: 1.6; }
+  #s5 .taste-signal { background: rgba(127,119,221,0.05); border-left: 2px solid var(--accent-purple); padding: 18px 22px; border-radius: 8px; margin: 28px 0; font-style: italic; font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+
   /* ── SLIDE 6: VERA ── */
-  #s5 .vera-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+  #s6 .vera-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
   #s6 .left-col { display: flex; flex-direction: column; gap: 14px; }
   #s6 .right-col { display: flex; flex-direction: column; gap: 14px; }
   .terminal {
@@ -403,11 +414,11 @@
   #s7 .mv-meta { font-size: 11px; color: var(--text-dim); margin-top: 1px; }
 
   /* ── SLIDE 8: THREE DECISIONS ── */
-  #s8 .decisions { display: flex; flex-direction: column; gap: 14px; margin-top: 24px; }
+  #s8 .decisions { display: flex; flex-direction: row; gap: 14px; margin-top: 24px; }
   #s8 .dec-card {
     background: rgba(229,229,229,0.02); border: 0.5px solid var(--border);
     border-radius: 12px; padding: 20px 24px;
-    display: grid; grid-template-columns: 200px 1fr; gap: 24px; align-items: start;
+    display: grid; gap: 24px; align-items: start;
   }
   #s8 .dec-card:nth-child(1) { border-left: 2px solid var(--accent-green); }
   #s8 .dec-card:nth-child(2) { border-left: 2px solid var(--accent-amber); }
@@ -459,7 +470,6 @@
 
   <!-- ── SLIDE 1: TITLE ── -->
   <div class="slide active" id="s1">
-    <div class="eyebrow anim-1">James Williams · AI Experience Walkthrough</div>
     <div class="title-block">
       <div class="t-display display anim-2">Stacks & Vera</div>
       <div class="subtitle anim-3">Designing the boundary between agent action and human judgment.</div>
@@ -472,7 +482,7 @@
     </div>
     <div class="slide-footer anim-5">
       <span class="footer-left">James Williams · AI Experience Walkthrough</span>
-      <span class="footer-right">01 / 09</span>
+      <span class="footer-right">01 / 10</span>
     </div>
   </div>
 
@@ -483,7 +493,7 @@
       <div class="t-h2">Teams make decisions.<br>The reasoning behind them collapses.</div>
     </div>
     <div class="anim-2 body-content">
-      <div class="lineage-label">How evidence becomes a decision →</div>
+      <div class="t-h3" style="margin-bottom:24px;">How evidence becomes a decision →</div>
       <div class="lineage">
         <div class="node">Interview</div>
         <div class="arrow">→</div>
@@ -508,7 +518,7 @@
     </div>
     <div class="slide-footer anim-5">
       <span class="footer-left">James Williams · AI Experience Walkthrough</span>
-      <span class="footer-right">02 / 09</span>
+      <span class="footer-right">02 / 10</span>
     </div>
   </div>
 
@@ -527,17 +537,17 @@
     </div>
     <div class="spectrum-labels anim-3">
       <div class="spec-label">
-        <div class="name">Fully Automated</div>
+        <div class="name t-h3">Fully Automated</div>
         <div class="sub">Fast, erodes trust</div>
         <div class="desc">Agent overwrites things. Promotes outputs that aren't ready. Trust collapses.</div>
       </div>
       <div class="spec-label">
-        <div class="name">Right Balance</div>
+        <div class="name t-h3">Right Balance</div>
         <div class="sub">System surfaces, human decides</div>
         <div class="desc">System acts on routine work. Surfaces uncertainty for human review. Trust compounds.</div>
       </div>
       <div class="spec-label">
-        <div class="name">Fully Human</div>
+        <div class="name t-h3">Fully Human</div>
         <div class="sub">Trustworthy, too slow</div>
         <div class="desc">Agent asks permission so often it's not worth using. Automation has no value.</div>
       </div>
@@ -547,19 +557,17 @@
     </div>
     <div class="slide-footer anim-5">
       <span class="footer-left">James Williams · AI Experience Walkthrough</span>
-      <span class="footer-right">03 / 09</span>
+      <span class="footer-right">03 / 10</span>
     </div>
   </div>
 
   <!-- ── SLIDE 4: MY ROLE ── -->
   <div class="slide" id="s4">
     <div class="anim-1">
-      <div class="t-mono-label" style="margin-bottom:14px;">My Role</div>
-      <div class="t-h2">Slide 4 — My role (2 min)</div>
+      <div class="t-mono-label" style="margin-bottom:14px;">RESPONSIBILITY</div>
+      <div class="t-h2" style="margin-bottom:64px;">My Role</div>
     </div>
-    <div class="card anim-2" style="margin-top:28px; border-color: rgba(29,158,117,0.2);">
-      <div class="t-body">"I designed and built this end-to-end. No team, no brief, no client. I mapped the system, defined the data model, designed every surface, and shipped it in React and TypeScript using Cursor and Claude as daily tools. Everything you're about to see is mine."</div>
-    </div>
+      <div class="t-body">I designed and built this end-to-end. No team, no brief, no client. I mapped the system, defined the data model, designed every surface, and shipped it in React and TypeScript using Cursor and Claude as daily tools. Everything you're about to see is mine."</div>
     <div class="anim-3" style="margin-top:32px;">
       <div class="t-h3" style="margin-bottom:16px;">What I owned:</div>
       <div style="display:flex; flex-direction:column; gap:12px;">
@@ -570,12 +578,38 @@
     </div>
     <div class="slide-footer anim-4">
       <span class="footer-left">James Williams · AI Experience Walkthrough</span>
-      <span class="footer-right">04 / 09</span>
+      <span class="footer-right">04 / 10</span>
     </div>
   </div>
 
-  <!-- ── SLIDE 5: TRUST MODEL ── -->
+  <!-- ── SLIDE 5: SPINE ── -->
   <div class="slide" id="s5">
+    <div class="anim-1">
+      <div class="t-mono-label" style="margin-bottom:14px;">The Interface</div>
+      <div class="t-h2">The Spine: a layout that encodes a mental model</div>
+      <div class="t-mono" style="margin-top:6px; font-size:11px; color:var(--text-dim);">4 min</div>
+    </div>
+    <iframe class="spine-iframe anim-2" src="https://stacks-rosy.vercel.app/projects" title="Stacks Interface"></iframe>
+    <div class="spine-description anim-3">Three columns. Read left to right to understand. Right to left to audit. The layout is a directional argument.</div>
+    <div class="spine-details anim-3">
+      <div class="detail-section">
+        <div class="t-h3" style="color:var(--text);">The Source Panel</div>
+        <div class="t-body">Typography hierarchy signals the type of input: interview, research, technical analysis. Semantic status pills show confidence and recency. Density enables scanning hundreds of sources without overwhelm.</div>
+      </div>
+      <div class="detail-section">
+        <div class="t-h3" style="color:var(--text);">The Lineage Panel</div>
+        <div class="t-body">Upstream traces sources. Downstream traces artifacts. Placed on the right because that's where your eye goes when you're questioning something — you start from the output and trace backward. The layout makes that instinct correct.</div>
+      </div>
+    </div>
+    <div class="taste-signal anim-4">"I could have put lineage anywhere. I put it right because that's where you go when you're questioning something — you start from the artifact and trace backward. The layout makes that instinct correct."</div>
+    <div class="slide-footer anim-5">
+      <span class="footer-left">James Williams · AI Experience Walkthrough</span>
+      <span class="footer-right">05 / 10</span>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 6: TRUST MODEL ── -->
+  <div class="slide" id="s6">
     <div class="anim-1">
       <div class="t-mono-label" style="margin-bottom:14px;">The Foundation</div>
       <div class="t-h2">The governance layer — designed before any surface.</div>
@@ -619,12 +653,12 @@
     </div>
     <div class="slide-footer anim-4">
       <span class="footer-left">James Williams · AI Experience Walkthrough</span>
-      <span class="footer-right">05 / 09</span>
+      <span class="footer-right">06 / 10</span>
     </div>
   </div>
 
-  <!-- ── SLIDE 6: VERA ── -->
-  <div class="slide" id="s6">
+  <!-- ── SLIDE 7: VERA ── -->
+  <div class="slide" id="s7">
     <div class="anim-1">
       <div class="t-mono-label" style="margin-bottom:14px;">The Agent Layer</div>
       <div style="display:flex; align-items:baseline; gap:16px; flex-wrap:wrap;">
@@ -686,12 +720,12 @@
     </div>
     <div class="slide-footer anim-4">
       <span class="footer-left">James Williams · AI Experience Walkthrough</span>
-      <span class="footer-right">06 / 09</span>
+      <span class="footer-right">07 / 10</span>
     </div>
   </div>
 
-  <!-- ── SLIDE 7: STACKS ── -->
-  <div class="slide" id="s7">
+  <!-- ── SLIDE 8: STACKS ── -->
+  <div class="slide" id="s8">
     <div class="anim-1">
       <div class="t-mono-label" style="margin-bottom:14px;">The Human Interface</div>
       <div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;">
@@ -768,12 +802,12 @@
     </div>
     <div class="slide-footer anim-4">
       <span class="footer-left">James Williams · AI Experience Walkthrough</span>
-      <span class="footer-right">07 / 09</span>
+      <span class="footer-right">08 / 10</span>
     </div>
   </div>
 
-  <!-- ── SLIDE 8: THREE DECISIONS ── -->
-  <div class="slide" id="s8">
+  <!-- ── SLIDE 9: THREE DECISIONS ── -->
+  <div class="slide" id="s9">
     <div class="anim-1">
       <div class="t-mono-label" style="margin-bottom:14px;">Design Judgment</div>
       <div class="t-h2">Three decisions worth discussing.</div>
@@ -803,12 +837,12 @@
     </div>
     <div class="slide-footer anim-5">
       <span class="footer-left">James Williams · AI Experience Walkthrough</span>
-      <span class="footer-right">08 / 09</span>
+      <span class="footer-right">09 / 10</span>
     </div>
   </div>
 
-  <!-- ── SLIDE 9: PAGERDUTY ── -->
-  <div class="slide" id="s9">
+  <!-- ── SLIDE 10: PAGERDUTY ── -->
+  <div class="slide" id="s10">
     <div class="anim-1">
       <div class="t-mono-label" style="margin-bottom:14px;">The Connection</div>
       <div class="t-h2">Same design problem. Different domain.</div>
@@ -871,7 +905,7 @@
     </div>
     <div class="slide-footer anim-4">
       <span class="footer-left">James Williams · AI Experience Walkthrough</span>
-      <span class="footer-right">09 / 09</span>
+      <span class="footer-right">10 / 10</span>
     </div>
   </div>
 
@@ -881,7 +915,7 @@
 <div id="nav">
   <button class="nav-btn" onclick="prev()">←</button>
   <div class="nav-dots" id="dots"></div>
-  <div id="slide-num">1 / 9</div>
+  <div id="slide-num">1 / 10</div>
   <button class="nav-btn" onclick="next()">→</button>
 </div>
 

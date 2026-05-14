@@ -141,7 +141,7 @@
   }
   .t-h3 {
     font-family: var(--font-display);
-    font-size: clamp(16px, 1.6vw, 20px);
+    font-size: clamp(16px, 1.6vw, 26px);
     font-weight: 500;
     line-height: 1.35;
     color: var(--text);
@@ -180,17 +180,6 @@
   .pill-purple { background: var(--accent-purple-dim); border-color: rgba(127,119,221,0.3); color: #b0aaee; }
   .pill-amber { background: var(--accent-amber-dim); border-color: rgba(239,159,39,0.25); color: #f4b84a; }
   .pill-dim { background: rgba(229,229,229,0.04); border-color: var(--border); color: var(--text-dim); }
-
-  .card {
-    background: rgba(229,229,229,0.03);
-    border: 0.5px solid var(--border);
-    border-radius: 12px;
-    padding: 20px 22px;
-  }
-  .card-green { border-left: 2px solid var(--accent-green); }
-  .card-purple { border-left: 2px solid var(--accent-purple); }
-  .card-amber { border-left: 2px solid var(--accent-amber); }
-  .card-red { border-left: 2px solid var(--accent-red); }
 
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
@@ -282,54 +271,54 @@
   #s3 .spec-label:nth-child(3) .name { color: var(--accent-purple); }
 
   /* ── SLIDE 5: TRUST MODEL ── */
-  #s5 .trust-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 28px; }
-  #s5 .ladder { display: flex; flex-direction: column; gap: 4px; }
-  #s5 .rung {
+  #s7 .trust-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 28px; }
+  #s7 .ladder { display: flex; flex-direction: column; gap: 4px; }
+  #s7 .rung {
     display: flex; align-items: center; gap: 14px;
     padding: 14px 18px; border-radius: 10px;
     border: 0.5px solid;
   }
-  #s5 .rung-canonical {
+  #s7 .rung-canonical {
     background: rgba(29,158,117,0.08);
     border-color: rgba(29,158,117,0.25);
   }
-  #s5 .rung-proposed {
+  #s7 .rung-proposed {
     background: rgba(127,119,221,0.08);
     border-color: rgba(127,119,221,0.25);
   }
-  #s5 .rung-draft {
+  #s7 .rung-draft {
     background: rgba(229,229,229,0.03);
     border-color: var(--border);
   }
-  #s5 .rung-label {
+  #s7 .rung-label {
     font-family: var(--font-mono); font-size: 11px;
     letter-spacing: .06em; text-transform: uppercase;
     flex: 0 0 90px;
   }
-  #s5 .rung-canonical .rung-label { color: #4ecda4; }
-  #s5 .rung-proposed .rung-label { color: #b0aaee; }
-  #s5 .rung-draft .rung-label { color: var(--text-dim); }
-  #s5 .rung-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.45; flex: 1; }
-  #s5 .rung-tag {
+  #s7 .rung-canonical .rung-label { color: #4ecda4; }
+  #s7 .rung-proposed .rung-label { color: #b0aaee; }
+  #s7 .rung-draft .rung-label { color: var(--text-dim); }
+  #s7 .rung-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.45; flex: 1; }
+  #s7 .rung-tag {
     font-family: var(--font-mono); font-size: 9px;
     letter-spacing: .06em; text-transform: uppercase;
     padding: 3px 8px; border-radius: 100px;
     white-space: nowrap;
   }
-  #s5 .rung-canonical .rung-tag { background: rgba(29,158,117,0.2); color: #4ecda4; }
-  #s5 .rung-proposed .rung-tag { background: rgba(127,119,221,0.2); color: #b0aaee; }
-  #s5 .rung-draft .rung-tag { background: rgba(229,229,229,0.06); color: var(--text-dim); }
-  #s5 .divider-row {
+  #s7 .rung-canonical .rung-tag { background: rgba(29,158,117,0.2); color: #4ecda4; }
+  #s7 .rung-proposed .rung-tag { background: rgba(127,119,221,0.2); color: #b0aaee; }
+  #s7 .rung-draft .rung-tag { background: rgba(229,229,229,0.06); color: var(--text-dim); }
+  #s7 .divider-row {
     display: flex; align-items: center; gap: 10px;
     padding: 6px 18px;
   }
-  #s5 .divider-line { height: 1px; background: var(--border); flex: 1; }
-  #s5 .divider-text {
+  #s7 .divider-line { height: 1px; background: var(--border); flex: 1; }
+  #s7 .divider-text {
     font-family: var(--font-mono); font-size: 9px;
     letter-spacing: .06em; text-transform: uppercase;
     color: var(--text-dim); white-space: nowrap;
   }
-  #s5 .side-cards { display: flex; flex-direction: column; gap: 14px; }
+  #s7 .side-cards { display: flex; flex-direction: column; gap: 14px; }
 
   /* ── SLIDE 5: SPINE ── */
   #s5 .spine-iframe { width: 100%; min-height: 720px; border: 0.5px solid var(--border-mid); border-radius: 10px; margin: 24px 0; }
@@ -351,9 +340,9 @@
   #s6 .taste-signal-amber { background: rgba(239,159,39,0.05); border-left: 2px solid var(--accent-amber); padding: 18px 22px; border-radius: 8px; margin: 28px 0; font-style: italic; font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
 
   /* ── SLIDE 7: VERA ── */
-  #s7 .vera-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
-  #s7 .left-col { display: flex; flex-direction: column; gap: 14px; }
-  #s7 .right-col { display: flex; flex-direction: column; gap: 14px; }
+  #s8 .vera-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+  #s8 .left-col { display: flex; flex-direction: column; gap: 14px; }
+  #s8 .right-col { display: flex; flex-direction: column; gap: 14px; }
   .terminal {
     background: rgba(0,0,0,0.4); border: 0.5px solid rgba(29,158,117,0.2);
     border-radius: 10px; padding: 16px 18px;
@@ -381,62 +370,62 @@
   .conf-phrase { font-size: 11px; color: var(--text-dim); flex: 0 0 160px; font-style: italic; }
 
   /* ── SLIDE 8: STACKS ── */
-  #s8 .stacks-layout { display: grid; grid-template-columns: 1fr 1.3fr; gap: 32px; margin-top: 24px; align-items: start; }
-  #s8 .spine-wrap {
+  #s9 .stacks-layout { display: grid; grid-template-columns: 1fr 1.3fr; gap: 32px; margin-top: 24px; align-items: start; }
+  #s9 .spine-wrap {
     border: 0.5px solid var(--border-mid); border-radius: 10px; overflow: hidden;
   }
-  #s8 .spine-header {
+  #s9 .spine-header {
     display: grid; grid-template-columns: 1fr 1.4fr 1fr;
     border-bottom: 0.5px solid var(--border);
   }
-  #s8 .spine-col-h {
+  #s9 .spine-col-h {
     padding: 8px 12px;
     font-family: var(--font-mono); font-size: 9px;
     letter-spacing: .07em; text-transform: uppercase; color: var(--text-dim);
     border-right: 0.5px solid var(--border);
   }
-  #s8 .spine-col-h:last-child { border-right: none; }
-  #s8 .spine-body { display: grid; grid-template-columns: 1fr 1.4fr 1fr; min-height: 180px; }
-  #s8 .spine-col { padding: 10px; border-right: 0.5px solid var(--border); display: flex; flex-direction: column; gap: 5px; }
-  #s8 .spine-col:last-child { border-right: none; }
-  #s8 .s-item {
+  #s9 .spine-col-h:last-child { border-right: none; }
+  #s9 .spine-body { display: grid; grid-template-columns: 1fr 1.4fr 1fr; min-height: 180px; }
+  #s9 .spine-col { padding: 10px; border-right: 0.5px solid var(--border); display: flex; flex-direction: column; gap: 5px; }
+  #s9 .spine-col:last-child { border-right: none; }
+  #s9 .s-item {
     font-size: 11px; color: var(--text-secondary);
     background: rgba(229,229,229,0.03); border: 0.5px solid var(--border);
     border-radius: 5px; padding: 6px 8px; line-height: 1.3;
   }
-  #s8 .s-item.selected { border-color: rgba(29,158,117,0.4); background: rgba(29,158,117,0.07); color: #4ecda4; }
-  #s8 .s-item.flagged { border-color: rgba(239,159,39,0.4); background: var(--accent-amber-dim); color: #f4b84a; }
-  #s8 .spine-dir {
+  #s9 .s-item.selected { border-color: rgba(29,158,117,0.4); background: rgba(29,158,117,0.07); color: #4ecda4; }
+  #s9 .s-item.flagged { border-color: rgba(239,159,39,0.4); background: var(--accent-amber-dim); color: #f4b84a; }
+  #s9 .spine-dir {
     display: flex; justify-content: space-between;
     padding: 8px 12px; border-top: 0.5px solid var(--border);
     font-family: var(--font-mono); font-size: 9px;
     letter-spacing: .05em; text-transform: uppercase; color: var(--text-dim);
   }
-  #s8 .right-col { display: flex; flex-direction: column; gap: 14px; }
-  #s8 .movement-list { background: rgba(229,229,229,0.02); border: 0.5px solid var(--border); border-radius: 10px; padding: 14px 16px; }
-  #s8 .movement-title { font-size: 13px; font-weight: 500; margin-bottom: 12px; }
-  #s8 .mv-row { display: flex; align-items: flex-start; gap: 10px; padding: 7px 0; border-bottom: 0.5px solid var(--border); }
-  #s8 .mv-row:last-child { border-bottom: none; }
-  #s8 .mv-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
-  #s8 .mv-dot-human { background: var(--accent-green); }
-  #s8 .mv-dot-agent { background: var(--accent-purple); }
-  #s8 .mv-name { font-size: 12px; font-weight: 500; color: var(--text); }
-  #s8 .mv-meta { font-size: 11px; color: var(--text-dim); margin-top: 1px; }
+  #s9 .right-col { display: flex; flex-direction: column; gap: 14px; }
+  #s9 .movement-list { background: rgba(229,229,229,0.02); border: 0.5px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+  #s9 .movement-title { font-size: 13px; font-weight: 500; margin-bottom: 12px; }
+  #s9 .mv-row { display: flex; align-items: flex-start; gap: 10px; padding: 7px 0; border-bottom: 0.5px solid var(--border); }
+  #s9 .mv-row:last-child { border-bottom: none; }
+  #s9 .mv-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+  #s9 .mv-dot-human { background: var(--accent-green); }
+  #s9 .mv-dot-agent { background: var(--accent-purple); }
+  #s9 .mv-name { font-size: 12px; font-weight: 500; color: var(--text); }
+  #s9 .mv-meta { font-size: 11px; color: var(--text-dim); margin-top: 1px; }
 
   /* ── SLIDE 9: THREE DECISIONS ── */
-  #s9 .decisions { display: flex; flex-direction: row; gap: 14px; margin-top: 24px; }
-  #s9 .dec-card {
+  #s10 .decisions { display: flex; flex-direction: row; gap: 14px; margin-top: 24px; }
+  #s10 .dec-card {
     background: rgba(229,229,229,0.02); border: 0.5px solid var(--border);
     border-radius: 12px; padding: 20px 24px;
     display: grid; gap: 24px; align-items: start;
   }
-  #s9 .dec-card:nth-child(1) { border-left: 2px solid var(--accent-green); }
-  #s9 .dec-card:nth-child(2) { border-left: 2px solid var(--accent-amber); }
-  #s9 .dec-card:nth-child(3) { border-left: 2px solid var(--accent-purple); }
-  #s9 .dec-num { font-family: var(--font-mono); font-size: 10px; letter-spacing: .06em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 6px; }
-  #s9 .dec-q { font-size: 14px; font-weight: 500; line-height: 1.35; color: var(--text); }
-  #s9 .dec-a { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
-  #s9 .dec-a strong { color: var(--text); font-weight: 500; }
+  #s109 .dec-card:nth-child(1) { border-left: 2px solid var(--accent-green); }
+  #s10 .dec-card:nth-child(2) { border-left: 2px solid var(--accent-amber); }
+  #s10 .dec-card:nth-child(3) { border-left: 2px solid var(--accent-purple); }
+  #s10 .dec-num { font-family: var(--font-mono); font-size: 10px; letter-spacing: .06em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 6px; }
+  #s10 .dec-q { font-size: 14px; font-weight: 500; line-height: 1.35; color: var(--text); }
+  #s10 .dec-a { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+  #s10 .dec-a strong { color: var(--text); font-weight: 500; }
 
   /* ── SLIDE 10: PAGERDUTY ── */
   #s10 .pd-grid { display: grid; grid-template-columns: 1fr 48px 1fr; gap: 0; margin-top: 24px; align-items: start; }
@@ -500,7 +489,7 @@
   <div class="slide" id="s2">
     <div class="header anim-1">
       <div class="t-mono-label" style="margin-bottom:14px;">The Problem</div>
-      <div class="t-h2">Teams make decisions.<br>The reasoning behind them collapses.</div>
+      <div class="t-h2">Teams Make Decisions.<br>The Reasoning Behind Them Collapses.</div>
     </div>
     <div class="anim-2 body-content">
       <div class="t-h3" style="margin-bottom:24px;">How evidence becomes a decision →</div>
@@ -536,7 +525,7 @@
   <div class="slide" id="s3">
     <div class="anim-1">
       <div class="t-mono-label" style="margin-bottom:14px;">The Design Question</div>
-      <div class="t-h2" style="max-width:700px;">Where does the agent act,<br>and where does it stop?</div>
+      <div class="t-h2" style="max-width:700px;">Where Does the Agent Act,<br>And Where Does It Stop?</div>
     </div>
     <div class="spectrum anim-2">
       <div class="spectrum-track">
@@ -596,7 +585,7 @@
   <div class="slide slide-scroll" id="s5">
     <div class="anim-1">
       <div class="t-mono-label" style="margin-bottom:14px;">The Interface</div>
-      <div class="t-h2" style="margin-bottom:64px;">The Spine: a layout that encodes a mental model</div>
+      <div class="t-h2" style="margin-bottom:64px;">The Spine: A Layout That Encodes a Mental Model</div>
     </div>
     <iframe class="spine-iframe anim-2" src="https://stacks-rosy.vercel.app/projects/fb-fsr-discovery" title="Stacks Interface"></iframe>
       
@@ -610,7 +599,7 @@
   <div class="slide" id="s6">
     <div class="anim-1">
       <div class="t-mono-label" style="margin-bottom:14px;">The Interaction Pattern</div>
-      <div class="t-h2">Reverberation: the interaction that defines the system</div>
+      <div class="t-h2" style="margin-bottom:64px;">Reverberation: The Interaction That Defines the System</div>
     </div>
     <iframe class="reverberation-iframe anim-2" src="https://stacks-rosy.vercel.app/projects/fb-fsr-discovery" title="Reverberation Demo"></iframe>
 
@@ -624,11 +613,15 @@
   <div class="slide" id="s7">
     <div class="anim-1">
       <div class="t-mono-label" style="margin-bottom:14px;">The Foundation</div>
-      <div class="t-h2">The governance layer — designed before any surface.</div>
-      <div class="t-mono" style="margin-top:6px; font-size:11px; color:var(--text-dim);">3 min</div>
+      <div class="t-h2" style="margin-bottom:64px;">The Governance Layer — Designed Before Any Surface.</div>
     </div>
     <div class="trust-layout">
-      <div class="ladder anim-2">
+            <div class="side-cards anim-2">
+          <div class="t-h3" style="margin-bottom:8px;">Visibility Ceiling & Movement Events</div>
+          <div class="t-body">Agents capped at <code style="font-family:var(--font-mono);font-size:11px;background:rgba(229,229,229,0.06);padding:2px 6px;border-radius:3px;">client_shareable</code>. Never <code style="font-family:var(--font-mono);font-size:11px;background:rgba(229,229,229,0.06);padding:2px 6px;border-radius:3px;">client_facing</code>. A human must decide something is ready to leave the building.</div>
+          <div class="t-body">Every agent action emits a permanent audit record — what changed, who did it, why. Attributed to <code style="font-family:var(--font-mono);font-size:11px;background:rgba(229,229,229,0.06);padding:2px 6px;border-radius:3px;">agent:vera</code>, not anonymous.</div>
+      </div>
+      <div class="ladder anim-3">
         <div class="rung rung-canonical">
           <div class="rung-label">Canonical</div>
           <div class="rung-desc">Source of truth. Immutable to agents. Promoted only by humans after review.</div>
@@ -650,19 +643,6 @@
           <div class="rung-tag">Agent floor</div>
         </div>
       </div>
-      <div class="side-cards anim-3">
-        <div class="card card-purple">
-          <div class="t-h3" style="margin-bottom:8px;">Visibility ceiling</div>
-          <div class="t-body">Agents capped at <code style="font-family:var(--font-mono);font-size:11px;background:rgba(229,229,229,0.06);padding:2px 6px;border-radius:3px;">client_shareable</code>. Never <code style="font-family:var(--font-mono);font-size:11px;background:rgba(229,229,229,0.06);padding:2px 6px;border-radius:3px;">client_facing</code>. A human must decide something is ready to leave the building.</div>
-        </div>
-        <div class="card card-green">
-          <div class="t-h3" style="margin-bottom:8px;">Movement events</div>
-          <div class="t-body">Every agent action emits a permanent audit record — what changed, who did it, why. Attributed to <code style="font-family:var(--font-mono);font-size:11px;background:rgba(229,229,229,0.06);padding:2px 6px;border-radius:3px;">agent:vera</code>, not anonymous.</div>
-        </div>
-        <div class="card" style="background:rgba(229,229,229,0.02);">
-          <div class="t-body" style="font-style:italic;">"If I got the trust model wrong, everything built on top of it would be wrong too."</div>
-        </div>
-      </div>
     </div>
     <div class="slide-footer anim-4">
       <span class="footer-left">James Williams · AI Experience Walkthrough</span>
@@ -674,11 +654,10 @@
   <div class="slide" id="s8">
     <div class="anim-1">
       <div class="t-mono-label" style="margin-bottom:14px;">The Agent Layer</div>
-      <div style="display:flex; align-items:baseline; gap:16px; flex-wrap:wrap;">
+      <div style="display:flex; margin-bottom: 64px; align-items:baseline; gap:16px; flex-wrap:wrap;">
         <div class="t-h2">Vera</div>
         <span class="pill pill-dim">CLI-based · Running in production · No UI by design</span>
       </div>
-      <div class="t-mono" style="margin-top:6px; font-size:11px; color:var(--text-dim);">4 min</div>
     </div>
     <div class="vera-grid">
       <div class="left-col anim-2">
@@ -738,95 +717,11 @@
     </div>
   </div>
 
-  <!-- ── SLIDE 9: STACKS ── -->
-  <div class="slide" id="s9">
-    <div class="anim-1">
-      <div class="t-mono-label" style="margin-bottom:14px;">The Human Interface</div>
-      <div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;">
-        <div class="t-h2">Stacks</div>
-        <span class="pill pill-dim">React · TypeScript · Cursor · Claude · tldraw</span>
-      </div>
-      <div class="t-mono" style="margin-top:6px; font-size:11px; color:var(--text-dim);">5 min</div>
-    </div>
-    <div class="stacks-layout">
-      <div class="anim-2">
-        <div class="spine-wrap">
-          <div class="spine-header">
-            <div class="spine-col-h">← Sources</div>
-            <div class="spine-col-h">Synthesis</div>
-            <div class="spine-col-h">Artifacts →</div>
-          </div>
-          <div class="spine-body">
-            <div class="spine-col">
-              <div class="s-item">CTO interview — auth constraints</div>
-              <div class="s-item selected">User research — onboarding</div>
-              <div class="s-item">Technical spike — feasibility</div>
-              <div class="s-item">Slack thread — vendor</div>
-            </div>
-            <div class="spine-col">
-              <div class="s-item selected">Onboarding takes &gt;4 min for 60% of users</div>
-              <div class="s-item">Auth adds 90s on average</div>
-              <div class="s-item flagged">Vendor integration feasible ⚠</div>
-            </div>
-            <div class="spine-col">
-              <div class="s-item">Roadmap Q3</div>
-              <div class="s-item flagged">Strategy doc ⚠ stale</div>
-              <div class="s-item">Scope check</div>
-            </div>
-          </div>
-          <div class="spine-dir">
-            <span>← Audit: right to left</span>
-            <span>Understand: left to right →</span>
-          </div>
-        </div>
-        <div class="card card-amber" style="margin-top:12px;">
-          <div class="t-h3" style="margin-bottom:6px;">Reverberation</div>
-          <div class="t-body">Upstream source changes → downstream artifacts flagged. Not auto-updated. The system surfaces the question. The human answers it.</div>
-        </div>
-      </div>
-      <div class="right-col anim-3">
-        <div class="card card-purple">
-          <div class="t-h3" style="margin-bottom:6px;">Semantic layer</div>
-          <div class="t-body">Status, visibility, lifecycle on every node. Agents capped at <span class="pill pill-purple" style="font-size:9px;">proposed</span>. Humans promote to <span class="pill pill-green" style="font-size:9px;">canonical</span>. Same trust model as Vera.</div>
-        </div>
-        <div class="movement-list">
-          <div class="movement-title">Movement events</div>
-          <div class="mv-row">
-            <div class="mv-dot mv-dot-human"></div>
-            <div>
-              <div class="mv-name">Promoted to canonical</div>
-              <div class="mv-meta">user:james · Strategy doc · 2 min ago</div>
-            </div>
-          </div>
-          <div class="mv-row">
-            <div class="mv-dot mv-dot-agent"></div>
-            <div>
-              <div class="mv-name">Proposed recalibration</div>
-              <div class="mv-meta">agent:vera · Onboarding synthesis · upstream changed</div>
-            </div>
-          </div>
-          <div class="mv-row">
-            <div class="mv-dot mv-dot-agent"></div>
-            <div>
-              <div class="mv-name">Created synthesis (draft)</div>
-              <div class="mv-meta">agent:vera · Auth friction pattern · pending review</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="slide-footer anim-4">
-      <span class="footer-left">James Williams · AI Experience Walkthrough</span>
-      <span class="footer-right">09 / 11</span>
-    </div>
-  </div>
-
   <!-- ── SLIDE 10: THREE DECISIONS ── -->
   <div class="slide" id="s10">
     <div class="anim-1">
       <div class="t-mono-label" style="margin-bottom:14px;">Design Judgment</div>
-      <div class="t-h2">Three decisions worth discussing.</div>
-      <div class="t-mono" style="margin-top:6px; font-size:11px; color:var(--text-dim);">3 min</div>
+      <div class="t-h2" style="margin-bottom: 64px;">Three Decisions Worth Discussing.</div>
     </div>
     <div class="decisions">
       <div class="dec-card anim-2">
@@ -861,7 +756,7 @@
   <div class="slide" id="s11">
     <div class="anim-1">
       <div class="t-mono-label" style="margin-bottom:14px;">The Connection</div>
-      <div class="t-h2">Same design problem. Different domain.</div>
+      <div class="t-h2">Same Design Problem. Different Domain.</div>
       <div class="t-mono" style="margin-top:6px; font-size:11px; color:var(--text-dim);">2 min</div>
     </div>
     <div class="pd-grid anim-2">
